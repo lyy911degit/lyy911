@@ -1,0 +1,84 @@
+*{
+    padding:0;
+    margin: 0;
+}
+body{
+    background: #E3E7EC;
+    height: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.global{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 7% auto;
+}
+.title{
+    width: 500px;
+    text-align: center;
+    margin-bottom: 25px;
+}
+h1{
+    font-size: 35px;
+    color: #666;
+}
+.login_box{
+    width: 500px;
+    background-color: #FFF;
+    margin:auto;
+    padding: 28px;
+    border-radius: 5px;
+    overflow: hidden;
+    outline: 0 none;
+    border: 1px solid #FFF;
+    box-shadow: 5px 5px 3px #888888;
+}
+input[type=text],input[type=password]{
+    width: 250px;
+    height: 30px;
+    padding: 0 5px;
+    border: 1px solid #D2D6DE;
+    border-radius: 5px;
+    background-color: #FAFFBD;
+    letter-spacing: 0.01em;
+}
+#account_span,#password_span{
+    display: inline-block;
+    white-space: nowrap;
+    width: 0;
+    color: red;
+}
+input[type=button]{
+    width: 250px;
+    height: 30px;
+    margin-bottom: 23px;
+    margin-top: 5px;
+    background-color: #3C8DBC;
+    border: 1px solid #367FA9;
+    border-radius: 3px;
+    cursor: pointer;
+    color: #FFF;
+    font-size: 16px;
+    transition: all 0.4s;
+}
+input[type=button]:hover{
+    background-color: #367FA9;
+}
+.letter{
+    text-align: center;
+    margin: 10px;
+}
+.login_copyright{
+    width: 500px;
+    text-align: center;
+    margin-top: 20px;
+    border: 0;
+    color: #7A667C;
+}
+.login_box{
+    z-index: 1;
+}

@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="webkit" name="renderer">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta content="width=device-width,initial-scale=1,user-scalable=1" name="viewport">
+    <meta content="权限管理" name="description">
+    <meta content="LaiYY" name="author">
+    <title>部门管理</title>
+    <script src="../../static/global.js"></script>
+    <script src="../../static/jquery/jquery.min.js"></script>
+    <script src="../../static/jquery/jquery-migrate-1.4.1.min.js"></script>
+    <link rel="stylesheet" href="../../static/fonts/font-icons.min.css">
+    <link rel="stylesheet" href="../../static/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../../static/select2/select2.css">
+    <link rel="stylesheet" href="../../static/icheck/minimal/grey.css">
+    <link rel="stylesheet" href="../../static/adminlte/AdminLTE.min.css">
+    <link rel="stylesheet" href="../../static/common/jeesite.css">
+    <link rel="stylesheet" href="../../static/common/common.css">
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement('script');
+            hm.src = "../../scripts/hm.js";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm,s);
+        })();
+    </script>
+</head>
+<body class="hold-transition">
+    <div class="wrapper">
+        <div class="main-content">
+            <div class="box box-main">
+                <div class="box-header">
+                    <div class="box-title">
+                        <i class="fa icon-grid"></i>
+                        新增部门
+                    </div>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <form id="inputForm" action="/sys/office/save" method="post" class="form-horizontal">
+                    <div class="box-body">
+                        <div class="form-unit">基本信息</div>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4" title="">
+                                        上级部门：
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <div class="input-group treeselect" id="parentDiv" data-url="/sys/office/treeData?excludeCode=">
+                                            <input id="parentCode" type="hidden" name="parent.id" value="" class="isReset">
+                                            <input id="parentName" type="text" name="parent.officeName" value="" class="form-control" readonly="readonly">
+                                            <span class="input-group-btn">
+                                                <a id="parentButton" href="javascript:" class="btn btn-default">
+                                                    <i class="fa fa-search"></i>
+                                                </a>
+                                            </span>
+                                        </div>
+                                        <script>
+                                            $('#parentButton,#parentName').click(function () {
+                                                if($('#parentButton').hasClass('disabled')){
+                                                    return true;
+                                                }
+                                                var options = {
+                                                    type:2,
+                                                    maxmin:true,
+                                                    shadeClose:true,
+                                                    title:'上级部门',
+                                                    area:['300px','400px'],
+                                                    content:'/js/tags/treeselect',
+                                                    contentFormData:{
+                                                        url:$('#parentDiv').attr('data-url'),
+                                                        checkbox:'false',
+                                                        expandLevel:'-1',
+                                                        selectCodes:$('#parentCode').val(),
+                                                        isReturnValue:'false'
+                                                    },
+                                                    success:function (layero,index) {
+                                                        if($(js.layer.window).width()<300 || $(js.layer.window).height()<400){
+                                                            js.layer.full(index);
+                                                        }
+                                                    },
+                                                    btn:['<i class="fa fa-check"></i> 确定'],
+                                                    btn1:function (index,layero) {
+                                                        var win = js.layer.iframeWindow(index);
+                                                        win.$('#keyword').val('').change();
+                                                        var codes = [],names = [],nodes;
+                                                        if("false" == "true"){
+                                                            nodes = win.tree.getCheckedNodes(true);
+                                                        }else{
+                                                            nodes = win.tree.getSelectedNodes();
+                                                        }
+                                                        for(var i=0;i<nodes.length;i++){
+                                                            var code = nodes[i]['false' == 'true'?'value':'id'],name = nodes[i]['name'];
+                                                            codes.push(code.replace(/^u_/g,''));
+                                                            names.push(name.replace(/\([0-9]*\)/g,''));
+                                                            break;
+                                                        }
+                                                        if(typeof treeselectCheck == 'function'){
+                                                            if(!treeselectCheck('parent',nodes)){
+                                                                return false;
+                                                            }
+                                                        }
+                                                        $("#parentCode").val(codes.join(',')).change();
+                                                        $("#parentName").val(names.join(',')).change();
+                                                        try{$('#parentCode,#parentName').valid();}catch(e){}
+                                                        if(typeof treeselectCallback == 'function'){
+                                                            treeselectCallback('parent','ok',index,layero,nodes);
+                                                        }
+                                                    }
+                                                };
+                                                options.btn.push('<i class="fa fa-eraser"></i> 清除');
+                                                options['btn'+options.btn.length] = function (index,layero) {
+                                                    $("#parentCode").val('').change();
+                                                    $("#parentName").val('').change();
+                                                    if(typeof treeselectCallback == 'function'){
+                                                        treeselectCallback('parent','clear',index,layero);
+                                                    }
+                                                };
+                                                options.btn.push('<i class="fa fa-close"></i> 关闭');
+                                                options['btn'+options.btn.length] = function (index,layero) {
+                                                    if(typeof treeselectCallback == 'function'){
+                                                        treeselectCallback('parent','cancel',index,layero);
+                                                    }
+                                                };
+                                                js.layer.open(options);
+                                            });
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4"title="">
+                                        <span class="required">*</span>
+                                        部门名称：<i class="fa icon-question hide"></i>
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input type="text" id="officeName" name="officeName" value="" maxlength="100" class="form-control required">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4"title="">
+                                        <span class="required">*</span>
+                                        部门代码：<i class="fa icon-question hide"></i>
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input type="hidden" id="isNewRecord" name="isNewRecord" value="true">
+                                        <input type="hidden" id="officeCode" name="officeCode" value="">
+                                        <input type="text" id="viewCode" name="viewCode" value="SD1" maxlength="64" class="form-control required abc">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4"title="">
+                                        <span class="required">*</span>
+                                        部门全称：<i class="fa icon-question hide"></i>
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input type="text" id="fullName" value="" maxlength="200" class="form-control required">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4"title="">
+                                        <span class="required">*</span>
+                                        排序号：<i class="fa icon-question hide"></i>
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input type="text" id="treeSort" value="70" maxlength="10" class="form-control required digits">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4"title="">
+                                        <span class="required">*</span>
+                                        部门类型：<i class="fa icon-question hide"></i>
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <select id="officeType" name="officeType" class="form-control required">
+                                            <option value="1">一级部门</option>
+                                            <option value="2">二级部门</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-unit">详细信息</div>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4"title="">
+                                        <span class="required hide">*</span>
+                                        负责人：<i class="fa icon-question hide"></i>
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input type="text" id="leader" name="leader" value="" maxlength="100" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4"title="">
+                                        <span class="required hide">*</span>
+                                        办公电话：<i class="fa icon-question hide"></i>
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input type="text" id="phone" name="phone" value="" maxlength="100" class="form-control phone">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4"title="">
+                                        <span class="required hide">*</span>
+                                        联系地址：<i class="fa icon-question hide"></i>
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input type="text" id="address" name="address" value="" maxlength="255" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4"title="">
+                                        <span class="required hide">*</span>
+                                        邮政编码：<i class="fa icon-question hide"></i>
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input type="text" id="zipCode" name="zipCode" value="" maxlength="100" class="form-control zipCode">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4"title="">
+                                        <span class="required hide">*</span>
+                                        电子邮箱：<i class="fa icon-question hide"></i>
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input type="text" id="email" name="email" value="" maxlength="300" class="form-control email">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2"title="">
+                                        <span class="required hide">*</span>
+                                        备注信息：<i class="fa icon-question hide"></i>
+                                    </label>
+                                    <div class="col-sm-10">
+                                        <textarea id="remarks" name="remarks" row="4" maxlength="500" class="form-control"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-footer">
+                        <div class="row">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-sm btn-primary" id="btnSubmit">
+                                    <i class="fa fa-check"></i>保 存
+                                </button>&nbsp;
+                                <button type="button" class="btn btn-sm btn-default" id="btnCancel" onclick="js.closeCurrentTabPage()">
+                                    <i class="fa fa-reply-all"></i>关 闭
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <a id="scroll-up" href="#" class="btn btn-sm"><i class="fa fa-angle-double-up"></i></a>
+    <script src="../../static/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../../static/select2/select2.js"></script>
+    <script src="../../static/select2/zh_CN.js"></script>
+    <script src="../../static/layer/layer.js"></script>
+    <script src="../../static/my97/WdatePicker.js"></script>
+    <script src="../../static/jquery-validation/jquery.validate.js"></script>
+    <script src="../../static/jquery-validation/localization/messages_zh_CN.js"></script>
+    <script src="../../static/jquery-validation/jquery.validate.extend.js"></script>
+    <script src="../../static/common/jeesite.js"></script>
+    <script src="../../static/common/jeesite_zh_CN.js"></script>
+    <script src="../../static/common/common.js"></script>
+    <script>
+        $('#inputForm').validate({
+            submitHandler:function (form) {
+                js.ajaxSubmitForm($(form),function (data) {
+                    js.showMessage(data.message);
+                    if(data.result == Global.TRUE){
+                        js.closeCurrentTabPage(function (contentWindow) {
+                            contentWindow.$('#dataGrid').dataGrid('refreshTreeChildren',$('#parentCode').val(),'');
+                        });
+                    }
+                },"json");
+            }
+        });
+        $('#officeName').change(function () {
+            if($('#fullName').val() == ''){
+                $('#fullName').val($(this).val());
+            }
+        });
+        function treeSelectCallback(id,act,index,layero){
+            if(id == 'parent' && (act == 'ok' || act == 'clear')){
+                $.get('/sys/office/createNextNode?parentCode=' + $('#parentCode').val(),function (data) {
+                    $('#treeSort').val(data.treeSort);
+                });
+            }
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

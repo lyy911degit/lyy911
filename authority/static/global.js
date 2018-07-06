@@ -1,0 +1,1 @@
+lang='zh_CN', ctx='/js/a',ctxPath='/js',ctxAdmin='/js/a',ctxFront='/js/f',ctxStatic='/js/static',Global={SHOW:'1',YES:'1',OP_AUTH:'auth',OP_ADD:'add',TRUE:'true',HIDE:'0',FALSE:'false',OP_EDIT:'edit',USERFILES_BASE_URL:'/userfiles/',NO:'0',STATUS_AUDIT:'4',STATUS_DELETE:'1',STATUS_NORMAL:'0',STATUS_FREEZE:'3',STATUS_AUDIT_BACK:'5',STATUS_DRAFT:'9',STATUS_DISABLE:'2'}

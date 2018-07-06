@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="webkit" name="renderer">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta content="width=device-width,initial-scale=1,user-scalable=1" name="viewport">
+    <meta content="权限管理" name="description">
+    <meta content="LaiYY" name="author">
+    <title>公司管理</title>
+    <script src="../../static/global.js"></script>
+    <script src="../../static/jquery/jquery.min.js"></script>
+    <script src="../../static/jquery/jquery-migrate-1.4.1.min.js"></script>
+    <link rel="stylesheet" href="../../static/fonts/font-icons.min.css">
+    <link rel="stylesheet" href="../../static/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../../static/select2/select2.css">
+    <link rel="stylesheet" href="../../static/icheck/minimal/grey.css">
+    <link rel="stylesheet" href="../../static/jqGrid/css/ui.jqgrid.css">
+    <link rel="stylesheet" href="../../static/adminlte/AdminLTE.min.css">
+    <link rel="stylesheet" href="../../static/common/jeesite.css">
+    <link rel="stylesheet" href="../../static/common/common.css">
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement('script');
+            hm.src = "../../static/scripts/hm.js";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="hold-transition">
+    <div class="wrapper">
+        <div class="main-content">
+            <div class="box-main">
+                <div class="box-header">
+                    <div class="box-title">
+                        <i class="fa icon-fire"></i>
+                        公司管理
+                    </div>
+                    <div class="box-tools pull-right">
+                        <a href="#" class="btn btn-default" id="btnSearch" title="查询">
+                            <i class="fa fa-filter"></i>
+                            查询
+                        </a>
+                        <a href="#" class="btn btn-default" id="btnRefreshTree" title="刷新">
+                            <i class="fa fa-refresh"></i>
+                            刷新
+                        </a>
+                        <a href="#" class="btn btn-default" id="btnExpandTreeNode" title="展开一级">
+                            <i class="fa fa-angle-double-down"></i>
+                            展开
+                        </a>
+                        <a href="#" class="btn btn-default" id="btnCollapseTreeNode" title="折叠全部">
+                            <i class="fa fa-angle-double-up"></i>
+                            折叠
+                        </a>
+                        <a href="/sys/company/form" class="btn btn-default btnTool" title="新增公司">
+                            <i class="fa fa-plus"></i>
+                            新增
+                        </a>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <form id="searchForm" action="/sys/company/listData" method="post" class="form-inline hide" data-page-no="" data-page-size="" data-order-by="">
+                        <div class="form-group">
+                            <label class="control-label">公司代码：</label>
+                            <div class="control-inline">
+                                <input type="text" id="viewCode" name="viewCode" value="" maxlength="100" class="form-control width-120">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">公司名称：</label>
+                            <div class="control-inline">
+                                <input type="text" id="companyName" name="companyName" value="" maxlength="200" class="form-control width-120">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">公司全称：</label>
+                            <div class="control-inline">
+                                <input type="text" id="fullName" name="fullName" value="" maxlength="200" class="form-control width-120">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">状态：</label>
+                            <div class="control-inline width-60">
+                                <select id="status" name="status" class="form-control">
+                                    <option value="">&nbsp;</option>
+                                    <option value="0">正常</option>
+                                    <option value="2">停用</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-sm">查询</button>
+                            <button type="reset" class="btn btn-default btn-sm">重置</button>
+                        </div>
+                    </form>
+                    <table id="dataGrid"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a id="scroll-up" href="#" class="btn btn-sm"><i class="fa fa-angle-double-up"></i></a>
+    <script src="../../static/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../../static/select2/select2.js"></script>
+    <script src="../../static/select2/zh_CN.js"></script>
+    <script src="../../static/layer/layer.js"></script>
+    <script src="../../static/my97/WdatePicker.js"></script>
+    <script src="../../static/jqGrid/js/jqgrid.js"></script>
+    <script src="../../static/jqGrid/js/jqgrid.extend.js"></script>
+    <script src="../../static/jqGrid/js/zh_CH.js"></script>
+    <script src="../../static/common/jeesite.js"></script>
+    <script src="../../static/common/jeesite_zh_CN.js"></script>
+    <script src="../../static/common/common.js"></script>
+    <script>
+        $('#dataGrid').dataGrid({
+            searchForm:$('#searchForm'),
+            columnModel:[
+                {header:'公司名称',name:'companyName',index:'a.companyName',width:250,align:'left',frozen:true,formatter:function (val,obj,row,act) {
+                        return '('+row.viewCode+')'+'<a href="/sys/company/form?companyCode='+row.companyCode+'" class="btnList" data-title="编辑公司">'+(val||row.id)+'</a>';
+                    }},
+                {header:'公司全称',name:'fullName',index:'a.full_name',width:200,align:'left'},
+                {header:'排序号',name:'treeSort',index:'a.tree_sort',width:80,align:'center'},
+                {header:'归属区域',name:'area.treeNames',index:'a.areaCode',width:200,align:'center'},
+                {header:'更新时间',name:'updateDate',index:'a.update_date',width:200,align:'center'},
+                {header:'备注信息',name:'remarks',index:'a.remarks',width:200,align:'left'},
+                {header:'状态',name:'status',index:'a.status',width:80,align:'center',formatter:function (val,obj,row,act) {
+                        return js.getDictLabel([{"id":"980614923145252864","createBy":"system","updateDate":"2018-05-13 19:27","status":"0","updateBy":"system","createDate":"2018-05-31 17:58","treeSort":20,"treeSorts":"0000000020,","treeLevel":0,"parentCodes":"0,","treeNames":"正常","treeLeaf":"1","dictType":"sys_status","cssStyle":"","dictLabelOrig":"正常","description":"","isSys":"1","dictCode":"980614923145252864","cssClass":"","dictValue":"0","dictLabel":"正常","isRoot":true,"isTreeLeaf":true,"parentCode":"0"},{"id":"980614923279470592","createBy":"system","updateDate":"2018-05-17 09:41","status":"0","updateBy":"system","createDate":"2018-05-17 09:41","treeSort":30,"treeSorts":"0000000030,","treeLevel":0,"parentCodes":"0,","treeNames":"删除","treeLeaf":"1","dictType":"sys_status","cssStyle":"color:#f00;","dictLabelOrig":"删除","description":"","isSys":"1","dictCode":"980614923279470592","cssClass":"","dictValue":"1","dictLabel":"删除","isRoot":true,"isTreeLeaf":true,"parentCode":"0"},{"id":"980614923279470593","createBy":"system","updateDate":"2018-05-13 19:27","status":"0","updateBy":"system","createDate":"2018-05-31 17:58","treeSort":40,"treeSorts":"0000000040,","treeLevel":0,"parentCodes":"0,","treeNames":"停用","treeLeaf":"1","dictType":"sys_status","cssStyle":"color:#f00;","dictLabelOrig":"停用","description":"","isSys":"1","dictCode":"980614923279470593","cssClass":"","dictValue":"2","dictLabel":"停用","isRoot":true,"isTreeLeaf":true,"parentCode":"0"},{"id":"980614923342385152","createBy":"system","updateDate":"2018-05-13 19:27","status":"0","updateBy":"system","createDate":"2018-05-31 17:58","treeSort":50,"treeSorts":"0000000050,","treeLevel":0,"parentCodes":"0,","treeNames":"冻结","treeLeaf":"1","dictType":"sys_status","cssStyle":"color:#fa0;","dictLabelOrig":"冻结","description":"","isSys":"1","dictCode":"980614923342385152","cssClass":"","dictValue":"3","dictLabel":"冻结","isRoot":true,"isTreeLeaf":true,"parentCode":"0"},{"id":"980614923476602880","createBy":"system","updateDate":"2018-05-13 19:27","status":"0","updateBy":"system","createDate":"2018-05-31 17:58","treeSort":60,"treeSorts":"0000000060,","treeLevel":0,"parentCodes":"0,","treeNames":"待审","treeLeaf":"1","dictType":"sys_status","cssStyle":"","dictLabelOrig":"待审","description":"","isSys":"1","dictCode":"980614923476602880","cssClass":"","dictValue":"4","dictLabel":"待审","isRoot":true,"isTreeLeaf":true,"parentCode":"0"},{"id":"980614923539517440","createBy":"system","updateDate":"2018-05-13 19:27","status":"0","updateBy":"system","createDate":"2018-05-31 17:58","treeSort":70,"treeSorts":"0000000070,","treeLevel":0,"parentCodes":"0,","treeNames":"驳回","treeLeaf":"1","dictType":"sys_status","cssStyle":"","dictLabelOrig":"驳回","description":"","isSys":"1","dictCode":"980614923539517440","cssClass":"","dictValue":"5","dictLabel":"驳回","isRoot":true,"isTreeLeaf":true,"parentCode":"0"},{"id":"980614923606626304","createBy":"system","updateDate":"2018-05-13 19:27","status":"0","updateBy":"system","createDate":"2018-05-31 17:58","treeSort":80,"treeSorts":"0000000080,","treeLevel":0,"parentCodes":"0,","treeNames":"草稿","treeLeaf":"1","dictType":"sys_status","cssStyle":"color:#aaa;","dictLabelOrig":"草稿","description":"","isSys":"1","dictCode":"980614923606626304","cssClass":"","dictValue":"9","dictLabel":"草稿","isRoot":true,"isTreeLeaf":true,"parentCode":"0"}], val, '未知', true);
+                    }},
+                {header:'操作',name:'actions',width:130,sortable:false,title:false,formatter:function (val,obj,row,act) {
+                        var actions = [];
+                        actions.push('<a href="/js/a/sys/office/form?officeCode='+row.officeCode+'" class="btnList" title="编辑部门"><i class="fa fa-pencil"></i></a>&nbsp;');
+                        if(row.status == Global.STATUS_NORMAL){
+                            actions.push('<a href="/js/a/sys/company/disable?companyCode='+row.companyCode+'" class="btnList" title="停用公司" data-confirm="确认要停用该公司吗？"><i class="glyphicon glyphicon-ban-circle"></i></a>&nbsp;');
+                        }
+                        if(row.status == Global.STATUS_DISABLE){
+                            actions.push('<a href="/js/a/sys/company/enable?companyCode='+row.companyCode+'" class="btnList" title="启用公司" data-confirm="确认要启用该公司吗？"><i class="glyphicon glyphicon-ok-circle"></i></a>&nbsp;');
+                        }
+                        actions.push('<a href="/js/a/sys/company/delete?companyCode='+row.companyCode+'" class="btnList" title="删除公司" data-confirm="确认要删除该公司及所有子公司吗？" data-deltreenode="'+row.id+'"><i class="fa fa-trash-o"></i></a>&nbsp;');
+                        actions.push('<a href="/js/a/sys/company/form?parentCode='+row.id+'" class="btnList" title="新增下级公司"><i class="fa fa-plus-square"></i></a>&nbsp;');
+                        return actions.join('');
+                    }}
+            ],
+            treeGrid:true,
+            defaultExpandLevel:0,
+            expandNodeClearPostData:'viewCode,companyName,fullName,',
+            ajaxSuccess:function (data) {
+
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

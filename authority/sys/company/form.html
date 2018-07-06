@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="webkit" name="renderer">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta content="width=device-width,initial-scale=1,user-scalable=1" name="viewport">
+    <meta content="权限管理" name="description">
+    <meta content="LaiYY" name="author">
+    <title>公司管理</title>
+    <script src="../../static/global.js"></script>
+    <script src="../../static/jquery/jquery.min.js"></script>
+    <script src="../../static/jquery/jquery-migrate-1.4.1.min.js"></script>
+    <link rel="stylesheet" href="../../static/fonts/font-icons.min.css">
+    <link rel="stylesheet" href="../../static/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../../static/select2/select2.css">
+    <link rel="stylesheet" href="../../static/icheck/minimal/grey.css">
+    <link rel="stylesheet" href="../../static/adminlte/AdminLTE.min.css">
+    <link rel="stylesheet" href="../../static/common/jeesite.css">
+    <link rel="stylesheet" href="../../static/common/common.css">
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement('script');
+            hm.src = "../../scripts/hm.js";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm,s);
+        })();
+    </script>
+</head>
+<body class="hold-transition">
+    <div class="wrapper">
+        <div class="main-content">
+            <div class="box box-main">
+                <div class="box-header">
+                    <div class="box-title">
+                        <i class="fa fa-fire"></i>
+                        新增公司
+                    </div>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <form id="inputForm" action="/sys/company/save" method="post" class="form-horizontal">
+                    <div class="box-body">
+                        <div class="form-unit">基本信息</div>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4">上级公司：</label>
+                                    <div class="col-sm-8">
+                                        <div class="input-group treeselect" id="parentDiv" data-url="/sys/company/treeData?excludeCode=">
+                                            <input id="parentCode" type="hidden" name="parent.id" value="" class="isReset">
+                                            <input id="parentName" type="text" name="parent.companyName" value="" class="form-control" readonly="readonly">
+                                            <span class="input-group-btn">
+                                                <a id="parentBtn" href="javascript:" class="btn btn-default">
+                                                    <i class="fa fa-search"></i>
+                                                </a>
+                                            </span>
+                                        </div>
+                                        <script>
+                                            $('#parentButton,#parentName').click(function () {
+                                                if($('#parentButton').hasClass('disabled')){
+                                                    return true;
+                                                }
+                                                var options = {
+                                                    type:2,
+                                                    maxmin:true,
+                                                    shadeClose:true,
+                                                    title:'上级公司',
+                                                    area:['300px','400px'],
+                                                    content:'/js/tags/treeselect',
+                                                    contentFormData:{
+                                                        url:$('#parentDiv').attr('data-url'),
+                                                        checkbox:'false',
+                                                        expandLevel:'-1',
+                                                        selectCodes:$('#parentCode').val(),
+                                                        isReturnValue:'false'
+                                                    },
+                                                    success:function (layero,index) {
+                                                        if($(js.layer.window).width()<300 || $(js.layer.window).height()<400){
+                                                            js.layer.full(index);
+                                                        }
+                                                    },
+                                                    btn:['<i class="fa fa-check"></i> 确定'],
+                                                    btn1:function (index,layero) {
+                                                        var win = js.layer.iframeWindow(index);
+                                                        win.$('#keyword').val('').change();
+                                                        var codes = [],names = [],nodes;
+                                                        if("false" == "true"){
+                                                            nodes = win.tree.getCheckedNodes(true);
+                                                        }else{
+                                                            nodes = win.tree.getSelectedNodes();
+                                                        }
+                                                        for(var i=0;i<nodes.length;i++){
+                                                            var code = nodes[i]['false' == 'true'?'value':'id'],name = nodes[i]['name'];
+                                                            codes.push(code.replace(/^u_/g,''));
+                                                            names.push(name.replace(/\([0-9]*\)/g,''));
+                                                            break;
+                                                        }
+                                                        if(typeof treeselectCheck == 'function'){
+                                                            if(!treeselectCheck('parent',nodes)){
+                                                                return false;
+                                                            }
+                                                        }
+                                                        $("#parentCode").val(codes.join(',')).change();
+                                                        $("#parentName").val(names.join(',')).change();
+                                                        try{$('#parentCode,#parentName').valid();}catch(e){}
+                                                        if(typeof treeselectCallback == 'function'){
+                                                            treeselectCallback('parent','ok',index,layero,nodes);
+                                                        }
+                                                    }
+                                                };
+                                                options.btn.push('<i class="fa fa-eraser"></i> 清除');
+                                                options['btn'+options.btn.length] = function (index,layero) {
+                                                    $("#parentCode").val('').change();
+                                                    $("#parentName").val('').change();
+                                                    if(typeof treeselectCallback == 'function'){
+                                                        treeselectCallback('parent','clear',index,layero);
+                                                    }
+                                                };
+                                                options.btn.push('<i class="fa fa-close"></i> 关闭');
+                                                options['btn'+options.btn.length] = function (index,layero) {
+                                                    if(typeof treeselectCallback == 'function'){
+                                                        treeselectCallback('parent','cancel',index,layero);
+                                                    }
+                                                };
+                                                js.layer.open(options);
+                                            });
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4"title="">
+                                        <span class="required">*</span>
+                                        公司名称：<i class="fa icon-question hide"></i>
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input type="text" id="companyName" name="companyName" value="" maxlength="200" class="form-control required">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4"title="">
+                                        <span class="required">*</span>
+                                        公司编码：<i class="fa icon-question hide"></i>
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input type="hidden" id="isNewRecord" name="isNewRecord" value="true">
+                                        <input type="hidden" id="companyCode" name="companyCode" value="">
+                                        <input type="text" id="viewCode" name="viewCode" value="SD1" maxlength="64" class="form-control required abc">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4"title="">
+                                        <span class="required">*</span>
+                                        公司全称：<i class="fa icon-question hide"></i>
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input type="text" id="fullName" value="" maxlength="200" class="form-control required">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4"title="">
+                                        <span class="required">*</span>
+                                        排序号：<i class="fa icon-question hide"></i>
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input type="text" id="treeSort" value="70" maxlength="10" class="form-control required digits">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4"title="">
+                                        <span class="required hide">*</span>
+                                        归属区域：<i class="fa icon-question hide"></i>
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <div class="input-group treeselect" id="areaDiv" data-url="/sys/area/treeData">
+                                            <input id="areaCode" type="hidden" name="area.areaCode" value="" class="isReset">
+                                            <input id="areaName" type="text" name="area.areaName" value="" class="form-control" readonly="readonly">
+                                            <span class="input-group-btn">
+                                                <a id="areaButton" href="javascript:" class="btn  btn-default">
+                                                    <i class="fa fa-search"></i>
+                                                </a>
+                                            </span>
+                                        </div>
+                                        <script>
+                                            $('#areaButton,#areaName').click(function () {
+                                                if($('#areaButton').hasClass('disabled')){
+                                                    return true;
+                                                }
+                                                var options = {
+                                                    type:2,
+                                                    maxmin:true,
+                                                    shadeClose:true,
+                                                    title:'区域选择',
+                                                    area:['300px','400px'],
+                                                    content:'/js/tags/treeselect',
+                                                    contentFormData:{
+                                                        url:$('#areaDiv').attr('data-url'),
+                                                        checkbox:'false',
+                                                        expandLevel:'-1',
+                                                        selectCodes:$('#areaCode').val(),
+                                                        isReturnValue:'false'
+                                                    },
+                                                    success:function (layero,index) {
+                                                        if($(js.layer.window).width()<300 || $(js.layer.window).height()<400){
+                                                            js.layer.full(index);
+                                                        }
+                                                    },
+                                                    btn:['<i class="fa fa-check"></i> 确定'],
+                                                    btn1:function (index,layero) {
+                                                        var win = js.layer.iframeWindow(index);
+                                                        win.$('#keyword').val('').change();
+                                                        var codes = [],names = [],nodes;
+                                                        if("false" == "true"){
+                                                            nodes = win.tree.getCheckedNodes(true);
+                                                        }else{
+                                                            nodes = win.tree.getSelectedNodes();
+                                                        }
+                                                        for(var i=0;i<nodes.length;i++){
+                                                            if(nodes[i].level == 0 && nodes[i].isParent){
+                                                                js.showMessage("不能选择根节点（"+nodes[i].name+")请重新选择。");
+                                                                return false;
+                                                            }
+                                                            if(nodes[i].isParent){
+                                                                js.showMessage("不能选择父节点（"+nodes[i].name+")请重新选择。");
+                                                                return false;
+                                                            }
+                                                            var code = nodes[i]['false' == 'true'?'value':'id'],name = nodes[i]['name'];
+                                                            var pNode = nodes[i].getParentNode();
+                                                            while(!!pNode){
+                                                                name = pNode.name + '/' +name;
+                                                                pNode = pNode.getParentNode();
+                                                            }
+                                                            codes.push(code.replace(/^u_/g,''));
+                                                            names.push(name.replace(/\([0-9]*\)/g,''));
+                                                            break;
+                                                        }
+                                                        if(typeof treeselectCheck == 'function'){
+                                                            if(!treeselectCheck('area',nodes)){
+                                                                return false;
+                                                            }
+                                                        }
+                                                        $("#areaCode").val(codes.join(',')).change();
+                                                        $("#areaName").val(names.join(',')).change();
+                                                        try{$('#parentCode,#parentName').valid();}catch(e){}
+                                                        if(typeof treeselectCallback == 'function'){
+                                                            treeselectCallback('parent','ok',index,layero,nodes);
+                                                        }
+                                                    }
+                                                };
+                                                options.btn.push('<i class="fa fa-eraser"></i> 清除');
+                                                options['btn'+options.btn.length] = function (index,layero) {
+                                                    $("#areaCode").val('').change();
+                                                    $("#areaName").val('').change();
+                                                    if(typeof treeselectCallback == 'function'){
+                                                        treeselectCallback('area','clear',index,layero);
+                                                    }
+                                                };
+                                                options.btn.push('<i class="fa fa-close"></i> 关闭');
+                                                options['btn'+options.btn.length] = function (index,layero) {
+                                                    if(typeof treeselectCallback == 'function'){
+                                                        treeselectCallback('area','cancel',index,layero);
+                                                    }
+                                                };
+                                                js.layer.open(options);
+                                            });
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4" title="">
+                                        <span class="required hide">*</span>
+                                        包含部门：<i class="fa icon-question hide"></i>
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <div class="input-group treeselect" id="companyOfficeListDiv" data-url="/sys/office/treeData">
+                                            <input id="companyOfficeListCode" type="hidden" name="" value="" class="isReset">
+                                            <input id="companyOfficeListName" type="text" name="" value="" class="form-control" readonly="readonly">
+                                            <span class="input-group-btn">
+                                                <a id="companyOfficeListButton" href="javascript:" class="btn btn-default">
+                                                    <i class="fa fa-search"></i>
+                                                </a>
+                                            </span>
+                                        </div>
+                                        <script>
+                                            $('#companyOfficeListButton,#companyOfficeListName').click(function () {
+                                                if($('#companyOfficeListButton').hasClass('disabled')){
+                                                    return true;
+                                                }
+                                                var options = {
+                                                    type:2,
+                                                    maxmin:true,
+                                                    shadeClose:true,
+                                                    title:'部门选择',
+                                                    area:['300px','400px'],
+                                                    content:'/js/tags/treeselect',
+                                                    contentFormData:{
+                                                        url:$('#companyOfficeListDiv').attr('data-url'),
+                                                        checkbox:'true',
+                                                        expandLevel:'-1',
+                                                        selectCodes:$('#companyOfficeListCode').val(),
+                                                        isReturnValue:'false'
+                                                    },
+                                                    success:function (layero,index) {
+                                                        if($(js.layer.window).width()<300 || $(js.layer.window).height()<400){
+                                                            js.layer.full(index);
+                                                        }
+                                                    },
+                                                    btn:['<i class="fa fa-check"></i> 确定'],
+                                                    btn1:function (index,layero) {
+                                                        var win = js.layer.iframeWindow(index);
+                                                        win.$('#keyword').val('').change();
+                                                        var codes = [],names = [],nodes;
+                                                        if("true" == "true"){
+                                                            nodes = win.tree.getCheckedNodes(true);
+                                                        }else{
+                                                            nodes = win.tree.getSelectedNodes();
+                                                        }
+                                                        for(var i=0;i<nodes.length;i++){
+                                                            if(nodes[i].isParent){
+                                                                continue;
+                                                            }
+                                                            if(nodes[i].level == 0 && nodes[i].isParent){
+                                                                js.showMessage("不能选择根节点（" + nodes[i].name + ")请重新选择。");
+                                                                return false;
+                                                            }
+                                                            if(nodes[i].isParent){
+                                                                js.showMessage("不能选择父节点（" + nodes[i].name + ")请重新选择。");
+                                                                return false;
+                                                            }
+                                                            var code = nodes[i]['false' == 'true'?'value':'id'],name = nodes[i]['name'];
+                                                            codes.push(code.replace(/^u_/g,''));
+                                                            names.push(name.replace(/\([0-9]*\)/g,''));
+                                                            break;
+                                                        }
+                                                        if(typeof treeselectCheck == 'function'){
+                                                            if(!treeselectCheck('companyOfficeList',nodes)){
+                                                                return false;
+                                                            }
+                                                        }
+                                                        $("#companyOfficeListCode").val(codes.join(',')).change();
+                                                        $("#companyOfficeListName").val(names.join(',')).change();
+                                                        try{$('#companyOfficeListCode,#companyOfficeListName').valid();}catch(e){}
+                                                        if(typeof treeselectCallback == 'function'){
+                                                            treeselectCallback('companyOfficeList','ok',index,layero,nodes);
+                                                        }
+                                                    }
+                                                };
+                                                options.btn.push('<i class="fa fa-eraser"></i> 清除');
+                                                options['btn'+options.btn.length] = function (index,layero) {
+                                                    $("#companyOfficeListCode").val('').change();
+                                                    $("#companyOfficeListName").val('').change();
+                                                    if(typeof treeselectCallback == 'function'){
+                                                        treeselectCallback('companyOfficeList','clear',index,layero);
+                                                    }
+                                                };
+                                                options.btn.push('<i class="fa fa-close"></i> 关闭');
+                                                options['btn'+options.btn.length] = function (index,layero) {
+                                                    if(typeof treeselectCallback == 'function'){
+                                                        treeselectCallback('companyOfficeList','cancel',index,layero);
+                                                    }
+                                                };
+                                                js.layer.open(options);
+                                            });
+                                        </script>
+                                        <input type="hidden" id="companyOfficeListJson" name="companyOfficeListJson" value="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2" title="">
+                                        <span class="required hide">*</span>
+                                        备注信息：
+                                        <i class="fa icon-question hide"></i>
+                                    </label>
+                                    <div class="col-sm-10">
+                                        <textarea id="remarks" name="remarks" rows="4" maxlength="500" class="form-control"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <a id="scroll-up" href="#" class="btn btn-sm"><i class="fa fa-angle-double-up"></i></a>
+    <script src="../../static/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../../static/select2/select2.js"></script>
+    <script src="../../static/select2/zh_CN.js"></script>
+    <script src="../../static/layer/layer.js"></script>
+    <script src="../../static/my97/WdatePicker.js"></script>
+    <script src="../../static/jquery-validation/jquery.validate.js"></script>
+    <script src="../../static/jquery-validation/localization/messages_zh_CN.js"></script>
+    <script src="../../static/jquery-validation/jquery.validate.extend.js"></script>
+    <script src="../../static/common/jeesite.js"></script>
+    <script src="../../static/common/jeesite_zh_CN.js"></script>
+    <script src="../../static/common/common.js"></script>
+    <script>
+        $('#inputForm').validate({
+            submitHandler:function (form) {
+                var companyOfficeData = $('#companyOfficeListCode').val().split(',');
+                $('#companyOfficeListJson').val(JSON.stringify(companyOfficeData));
+                js.ajaxSubmitForm($(form),function (data) {
+                    js.showMessage(data.message);
+                    if(data.result == Global.TRUE){
+                        js.closeCurrentTabPage(function (contentWindow) {
+                            contentWindow.$('#dataGrid').dataGrid('refreshTreeChildren',$('#parentCode').val(),'');
+                        });
+                    }
+                },"json");
+            }
+        });
+        $('#companyName').change(function () {
+            if($('#fullName').val() == ""){
+                $('#fullName').val($(this).val());
+            }
+        });
+        function treeselectCallback(id,act,index,layero) {
+            if(id == 'parent' && (act == 'ok' || act == 'clear')){
+                $.get('/sys/company/createNextNode?parentCode=' + $('#parentCode').val(),function (data) {
+                    $('#treeSort').val(data.treeSort);
+                })
+            }
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

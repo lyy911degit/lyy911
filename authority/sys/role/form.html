@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="webkit" name="renderer">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta content="width=device-width,initial-scale=1,user-scalable=1" name="viewport">
+    <meta content="权限管理" name="description">
+    <meta content="LaiYY" name="author">
+    <title>部门管理</title>
+    <script src="../../static/global.js"></script>
+    <script src="../../static/jquery/jquery.min.js"></script>
+    <script src="../../static/jquery/jquery-migrate-1.4.1.min.js"></script>
+    <link rel="stylesheet" href="../../static/fonts/font-icons.min.css">
+    <link rel="stylesheet" href="../../static/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../../static/select2/select2.css">
+    <link rel="stylesheet" href="../../static/icheck/minimal/grey.css">
+    <link rel="stylesheet" href="../../static/jquery-ztree/css/metro/zTreeStyle.css">
+    <link rel="stylesheet" href="../../static/adminlte/AdminLTE.min.css">
+    <link rel="stylesheet" href="../../static/common/jeesite.css">
+    <link rel="stylesheet" href="../../static/common/common.css">
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement('script');
+            hm.src = "../../scripts/hm.js";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm,s);
+        })();
+    </script>
+</head>
+<body class="hold-transition">
+    <div class="wrapper">
+        <div class="main-content">
+            <div class="box box-main">
+                <div class="box-header">
+                    <div class="box-title">
+                        <i class="fa icon-people"></i>新增角色
+                    </div>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <form id="inputForm" action="/sys/role/save" method="post" class="form-horizontal">
+                    <input type="hidden" id="op" name="op" value="add">
+                    <div class="box-body">
+                        <div class="form-unit">基本信息</div>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4" title="">
+                                        <span class="required">*</span>
+                                        角色名称：<i class="fa icon-question hide"></i>
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input type="hidden" id="oldRoleName" name="oldRoleName" value="">
+                                        <input type="text" id="roleName" name="roleName" value="" maxlength="100" class="form-control required" remote="/sys/role/checkRoleName?oldRoleName=" data-msg-remote="角色名称已存在">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4" title="">
+                                        <span class="required">*</span>
+                                        角色编码：<i class="fa icon-question hide"></i>
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input type="hidden" id="isNewRecord" name="isNewRecord" value="true">
+                                        <input type="text" id="roleCode" name="roleCode" value="" maxlength="64" class="form-control required abc">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4" title="">
+                                        <span class="required">*</span>
+                                        排序号：<i class="fa icon-question hide"></i>
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input type="text" id="roleSort" name="roleSort" value="40" maxlength="10" class="form-control required digits">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4" title="">
+                                        <span class="required hide">*</span>
+                                        用户类型：<i class="fa icon-question hide"></i>
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <select id="userType" name="userType" class="form-control">
+                                            <option value="">&nbsp;</option>
+                                            <option value="employee">员工</option>
+                                            <option value="btype">单位</option>
+                                            <option value="person">个人</option>
+                                            <option value="expert">专家</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4" title="">
+                                        <span class="required">*</span>
+                                        系统内置：<i class="fa icon-question hide"></i>
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <span id="isSys" class="icheck">
+                                            <label><input type="radio" id="isSys1" name="isSys" value="1" class="form-control required"> 是</label>
+                                            <label><input type="radio" id="isSys2" name="isSys" value="0" class="form-control required"> 否</label>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4" title="">
+                                        <span class="required hide">*</span>
+                                        角色分类：<i class="fa icon-question hide"></i>
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <select id="roleType" name="roleType" class="form-control">
+                                            <option value="">&nbsp;</option>
+                                            <option value="1">高管</option>
+                                            <option value="2">中层</option>
+                                            <option value="3">基层</option>
+                                            <option value="4">其他</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2" title="">
+                                        <span class="required hide">*</span>
+                                        备注信息：<i class="fa icon-question hide"></i>
+                                    </label>
+                                    <div class="col-sm-10">
+                                        <textarea id="remarks" name="remarks" rows="4" maxlength="500" class="form-control"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-unit">授权功能菜单</div>
+                        <div id="menuTrees"></div>
+                        <script id="menuTpl" type="text/template">
+                            <div class="pull-left" style="padding:0 15px;min-width:300px;">
+                                <div class="box box-solid" style="background:#FAFAFA">
+                                    <div class="box-header">
+                                        <div class="box-title icheck">
+                                            <label><input type="checkbox" id="checkall_{{d.key}}" class="checkall"/> {{d.label}}</label>
+                                        </div>
+                                        <div class="box-tools pull-right" style="top:8px;">
+                                            <a class="btn btn-box-tool" id="expand_{{d.key}}" value="menuTree_{{d.key}}" >展开</a>/
+                                            <a class="btn btn-box-tool" id="collapse_{{d.key}}" value="menuTree_{{d.key}}" >折叠</a>
+                                        </div>
+                                    </div>
+                                    <div class="box-body">
+                                        <div id="menuTree_{{d.key}}" class="ztree"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </script>
+                        <input type="hidden" id="roleMenuListJson" name="roleMenuListJson" value="">
+                    </div>
+                    <div class="box-footer">
+                        <div class="row">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-sm btn-primary" id="btnSubmit">
+                                    <i class="fa fa-check"></i>保 存
+                                </button>&nbsp;
+                                <button type="button" class="btn btn-sm btn-default" id="btnCancel" onclick="js.closeCurrentTabPage()">
+                                    <i class="fa fa-reply-all"></i>关 闭
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <a id="scroll-up" href="#" class="btn btn-sm"><i class="fa fa-angle-double-up"></i></a>
+    <script src="../../static/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../../static/select2/select2.js"></script>
+    <script src="../../static/select2/zh_CN.js"></script>
+    <script src="../../static/layer/layer.js"></script>
+    <script src="../../static/my97/WdatePicker.js"></script>
+    <script src="../../static/jquery-ztree/js/jquery.ztree.all-3.5.js"></script>
+    <script src="../../static/jquery-validation/jquery.validate.js"></script>
+    <script src="../../static/jquery-validation/localization/messages_zh_CN.js"></script>
+    <script src="../../static/jquery-validation/jquery.validate.extend.js"></script>
+    <script src="../../static/common/jeesite.js"></script>
+    <script src="../../static/common/jeesite_zh_CN.js"></script>
+    <script src="../../static/common/common.js"></script>
+    <script>
+        $("#inputForm").validate({
+            submitHandler:function (form) {
+                var menuData = [];
+                $.each(menuTrees,function (key,menuTree) {
+                    var treeNodes = menuTree.getCheckedNodes(true);
+                    for(var i=0;i<treeNodes.length;i++){
+                        menuData.push(treeNodes[i].id);
+                    }
+                });
+                $("#roleMenuListJson").val(JSON.stringify(menuData));
+                js.ajaxSubmitForm($(form),function (data) {
+                    js.showMessage(data.message);
+                    if(data.result == Global.TRUE){
+                        js.closeCurrentTabPage(function (contentWindow) {
+                            contentWindow.page();
+                        })
+                    }
+                },"json");
+            }
+        });
+        var setting = {
+            check:{enable:true,nocheckInherit:true,checkboxType:{"Y":"ps","N":"ps"}},
+            view:{selectedMulti:false,nameIsHTML:true},
+            data:{simpleData:{enable:true},key:{title:"title"}},
+            callback:{
+                beforeClick:function (treeId,treeNode,clickFlag) {
+                    var tree = $.fn.zTree.getZTreeObj(treeId);
+                    tree.checkNode(treeNode,!treeNode.checked,true,true);
+                    return false;
+                },
+                onCheck:function (event,treeId,treeNode) {
+                    var tid = treeNode.tId;
+                    if(!treeNode.checked){
+                        $(".checkall[value="+treeId+"]").each(function () {
+                            if(this.checked){
+                                $(this).removeAttr("checked").iCheck('update');
+                            }
+                            return false;
+                        });
+                    }
+                }
+            }
+        },
+            sysCodeDict = [{"id":"980614923933782017","createBy":"system","updateDate":"2018-04-21 19:56","status":"0","updateBy":"system","createDate":"2018-04-21 19:56","treeSort":30,"treeSorts":"0000000030,","treeLevel":0,"parentCodes":"0,","treeNames":"主导航菜单","treeLeaf":"1","dictType":"sys_menu_sys_code","cssStyle":"","dictLabelOrig":"主导航菜单","description":"","isSys":"1","dictCode":"980614923933782017","cssClass":"","dictValue":"default","dictLabel":"主导航菜单","isRoot":true,"isTreeLeaf":true,"parentCode":"0"}],
+            menuTrees = {};
+        $.ajax({
+            type:'post',
+            url:'/sys/role/menuTreeData?__t='+new Date().getTime(),
+            data:{roleCode:""},
+            dataType:'json',
+            async:false,
+            error:function (data) {
+                js.showErrorMessage(data.responseText);
+            },
+            success:function (data,status,xhr) {
+                for(var sysCode in data.menuMap){
+                    var menuMap = data.menuMap[sysCode];
+                    $("#menuTrees").append(js.template('menuTpl',{key:sysCode,label:js.getDictLable(sysCodeDict,sysCode,'未知',true)}));
+                    var tree = $.fn.zTree.init($("menuTree_"+sysCode),setting,menuMap);
+                    var nodes = tree.getNodesByParam("level",0);
+                    for(var i=0;i<nodes.length;i++){
+                        tree.expandNode(nodes[i],true,false,false);
+                    }
+                    nodes = tree.getNodesByParam("level",1);
+                    for(var i=0;i<nodes.length;i++){
+                        tree.expandNode(nodes[i],true,false,false);
+                    }
+                    $('#expand_'+sysCode).click(function () {
+                        var sysCode = $(this).attr('sysCode');
+                        menuTrees[sysCode].expandAll(true);
+                    }).attr("sysCode",sysCode);
+                    $('#collapse_'+sysCode).click(function () {
+                        var sysCode = $(this).attr('sysCode');
+                        menuTrees[sysCode].expandAll(false);
+                    }).attr("sysCode",sysCode);
+                    menuTrees[sysCode] = tree;
+                }
+                for(var idx in data.roleMenuList){
+                    var roleMenu = data.roleMenuList[idx],sysCode = roleMenu.sysCode;
+                    var node = menuTrees[sysCode].getNodeByParam("id",roleMenu.menuCode);
+                    try{
+                        menuTrees[sysCode].checkNode(node,true,false);
+                    }catch (e) {}
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="webkit" name="renderer">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta content="width=device-width,initial-scale=1,user-scalable=1" name="viewport">
+    <meta content="权限管理" name="description">
+    <meta content="LaiYY" name="author">
+    <title>角色管理</title>
+    <script src="../../static/global.js"></script>
+    <script src="../../static/jquery/jquery.min.js"></script>
+    <script src="../../static/jquery/jquery-migrate-1.4.1.min.js"></script>
+    <link rel="stylesheet" href="../../static/fonts/font-icons.min.css">
+    <link rel="stylesheet" href="../../static/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../../static/select2/select2.css">
+    <link rel="stylesheet" href="../../static/icheck/minimal/grey.css">
+    <link rel="stylesheet" href="../../static/jqGrid/css/ui.jqgrid.css">
+    <link rel="stylesheet" href="../../static/adminlte/AdminLTE.min.css">
+    <link rel="stylesheet" href="../../static/common/jeesite.css">
+    <link rel="stylesheet" href="../../static/common/common.css">
+</head>
+<body class="hold-transition">
+    <div class="wrapper">
+        <div class="main-content">
+            <div class="box-main">
+                <div class="box-header">
+                    <div class="box-title">
+                        <i class="fa icon-people"></i>
+                        角色管理
+                    </div>
+                    <div class="box-tools pull-right">
+                        <a href="#" class="btn btn-default" id="btnSearch" title="查询">
+                            <i class="fa fa-filter"></i>
+                            查询
+                        </a>
+                        <a href="/sys/role/form?op=add" class="btn btn-default btnTool" title="新增角色">
+                            <i class="fa fa-plus"></i>
+                            新增
+                        </a>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <form id="searchForm" action="/sys/role/listData" method="post" class="form-inline hide" data-page-no="" data-page-size="" data-order-by="">
+                        <div class="form-group">
+                            <label class="control-label">角色名称：</label>
+                            <div class="control-inline">
+                                <input type="text" id="roleName_like" name="roleName_like" value="" maxlength="100" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">角色编码：</label>
+                            <div class="control-inline">
+                                <input type="text" id="roleCode_like" name="roleCode_like" value="" maxlength="100" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">用户类型：</label>
+                            <div class="control-inline width-90">
+                                <select id="userType" name="userType" class="form-control">
+                                    <option value="">&nbsp;</option>
+                                    <option value="employee">员工</option>
+                                    <option value="btype">单位</option>
+                                    <option value="person">个人</option>
+                                    <option value="expert">专家</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">是否系统：</label>
+                            <div class="control-inline width-60">
+                                <select id="isSys" name="isSys" class="form-control">
+                                    <option value="">&nbsp;</option>
+                                    <option value="1">是</option>
+                                    <option value="0">否</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">状态：</label>
+                            <div class="control-inline width-60">
+                                <select id="status" name="status" class="form-control">
+                                    <option value="">&nbsp;</option>
+                                    <option value="0">正常</option>
+                                    <option value="2">停用</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-sm">查询</button>
+                            <button type="reset" class="btn btn-default btn-sm">重置</button>
+                        </div>
+                    </form>
+                    <table id="dataGrid"></table>
+                    <div id="dataGridPage"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a id="scroll-up" href="#" class="btn btn-sm"><i class="fa fa-angle-double-up"></i></a>
+    <script src="../../static/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../../static/select2/select2.js"></script>
+    <script src="../../static/select2/zh_CN.js"></script>
+    <script src="../../static/layer/layer.js"></script>
+    <script src="../../static/my97/WdatePicker.js"></script>
+    <script src="../../static/jqGrid/js/jqgrid.js"></script>
+    <script src="../../static/jqGrid/js/jqgrid.extend.js"></script>
+    <script src="../../static/jqGrid/js/zh_CH.js"></script>
+    <script src="../../static/common/jeesite.js"></script>
+    <script src="../../static/common/jeesite_zh_CN.js"></script>
+    <script src="../../static/common/common.js"></script>
+    <script>
+        $('#dataGrid').dataGrid({
+            searchForm:$('#searchForm'),
+            columnModel:[
+                {header:'角色名称',name:'roleName',index:'a.roleName',width:250,align:'center',frozen:true,formatter:function (val,obj,row,act) {
+                        return '<a href="/js/a/sys/role/form?roleCode='+row.roleCode+'&op=edit" class="btnList" data-title="编辑角色">'+(val||row.id)+'</a>';
+                    }},
+                {header:'角色编码',name:'roleCode',index:'a.role_code',width:150,align:'center'},
+                {header:'排序号',name:'roleSort',index:'a.role_sort',width:80,align:'center'},
+                {header:'系统角色',name:'isSys',index:'a.is_sys',width:80,align:'center',formatter:function (val,obj,row,act) {
+                        return js.getDictLabel([{"id":"980614922755182592","createBy":"system","updateDate":"2018-04-02 09:16","status":"0","updateBy":"system","createDate":"2018-04-02 09:16","treeSort":30,"treeSorts":"0000000030,","treeLevel":0,"parentCodes":"0,","treeNames":"是","treeLeaf":"1","dictType":"sys_yes_no","cssStyle":"","dictLabelOrig":"是","description":"","isSys":"1","dictCode":"980614922755182592","cssClass":"","dictValue":"1","dictLabel":"是","isRoot":true,"isTreeLeaf":true,"parentCode":"0"},{"id":"980614923082338304","createBy":"system","updateDate":"2018-04-02 09:16","status":"0","updateBy":"system","createDate":"2018-04-02 09:16","treeSort":40,"treeSorts":"0000000040,","treeLevel":0,"parentCodes":"0,","treeNames":"否","treeLeaf":"1","dictType":"sys_yes_no","cssStyle":"color:#aaa;","dictLabelOrig":"否","description":"","isSys":"1","dictCode":"980614923082338304","cssClass":"","dictValue":"0","dictLabel":"否","isRoot":true,"isTreeLeaf":true,"parentCode":"0"}], val, '未知', true);
+                    }},
+                {header:'用户类型',name:'userType',index:'a.user_type',width:100,align:'center',formatter:function (val,obj,row,act) {
+                        return js.getDictLabel([{"id":"980614924588093440","createBy":"system","updateDate":"2018-04-02 09:16","status":"0","updateBy":"system","createDate":"2018-04-02 09:16","treeSort":30,"treeSorts":"0000000030,","treeLevel":0,"parentCodes":"0,","treeNames":"员工","treeLeaf":"1","dictType":"sys_user_type","cssStyle":"","dictLabelOrig":"员工","description":"","isSys":"1","dictCode":"980614924588093440","cssClass":"","dictValue":"employee","dictLabel":"员工","isRoot":true,"isTreeLeaf":true,"parentCode":"0"},{"id":"980614924655202305","createBy":"system","updateDate":"2018-04-02 09:16","status":"0","updateBy":"system","createDate":"2018-04-02 09:16","treeSort":50,"treeSorts":"0000000050,","treeLevel":0,"parentCodes":"0,","treeNames":"单位","treeLeaf":"1","dictType":"sys_user_type","cssStyle":"","dictLabelOrig":"单位","description":"","isSys":"1","dictCode":"980614924655202305","cssClass":"","dictValue":"btype","dictLabel":"单位","isRoot":true,"isTreeLeaf":true,"parentCode":"0"},{"id":"980614924718116864","createBy":"system","updateDate":"2018-04-02 09:16","status":"0","updateBy":"system","createDate":"2018-04-02 09:16","treeSort":60,"treeSorts":"0000000060,","treeLevel":0,"parentCodes":"0,","treeNames":"个人","treeLeaf":"1","dictType":"sys_user_type","cssStyle":"","dictLabelOrig":"个人","description":"","isSys":"1","dictCode":"980614924718116864","cssClass":"","dictValue":"persion","dictLabel":"个人","isRoot":true,"isTreeLeaf":true,"parentCode":"0"},{"id":"980614924785225728","createBy":"system","updateDate":"2018-04-02 09:16","status":"0","updateBy":"system","createDate":"2018-04-02 09:16","treeSort":70,"treeSorts":"0000000070,","treeLevel":0,"parentCodes":"0,","treeNames":"专家","treeLeaf":"1","dictType":"sys_user_type","cssStyle":"","dictLabelOrig":"专家","description":"","isSys":"1","dictCode":"980614924785225728","cssClass":"","dictValue":"expert","dictLabel":"专家","isRoot":true,"isTreeLeaf":true,"parentCode":"0"}], val, '<font color=#aaa>未设置</font>', true);
+                    }},
+                {header:'数据范围',name:'dataScope',index:'a.data_scope',width:100,align:'center',formatter:function (val,obj,row,act) {
+                        return js.getDictLabel([{"id":"980614924915249152","createBy":"system","updateDate":"2018-04-02 09:16","status":"0","updateBy":"system","createDate":"2018-04-02 09:16","treeSort":30,"treeSorts":"0000000030,","treeLevel":0,"parentCodes":"0,","treeNames":"未设置","treeLeaf":"1","dictType":"sys_role_data_scope","cssStyle":"","dictLabelOrig":"未设置","description":"","isSys":"1","dictCode":"980614924915249152","cssClass":"","dictValue":"0","dictLabel":"未设置","isRoot":true,"isTreeLeaf":true,"parentCode":"0"},{"id":"980614924915249153","createBy":"system","updateDate":"2018-04-02 09:16","status":"0","updateBy":"system","createDate":"2018-04-02 09:16","treeSort":40,"treeSorts":"0000000040,","treeLevel":0,"parentCodes":"0,","treeNames":"全部数据权限","treeLeaf":"1","dictType":"sys_role_data_scope","cssStyle":"","dictLabelOrig":"全部数据权限","description":"","isSys":"1","dictCode":"980614924915249153","cssClass":"","dictValue":"1","dictLabel":"全部数据权限","isRoot":true,"isTreeLeaf":true,"parentCode":"0"},{"id":"980614924915249154","createBy":"system","updateDate":"2018-04-02 09:16","status":"0","updateBy":"system","createDate":"2018-04-02 09:16","treeSort":50,"treeSorts":"0000000050,","treeLevel":0,"parentCodes":"0,","treeNames":"自定数据权限","treeLeaf":"1","dictType":"sys_role_data_scope","cssStyle":"","dictLabelOrig":"自定数据权限","description":"","isSys":"1","dictCode":"980614924915249154","cssClass":"","dictValue":"2","dictLabel":"自定数据权限","isRoot":true,"isTreeLeaf":true,"parentCode":"0"}], val, '未设置', true);
+                    }},
+                {header:'更新时间',name:'updateDate',index:'a.update_date',width:130,align:'center'},
+                {header:'备注信息',name:'remarks',index:'a.remarks',width:160,align:'left'},
+                {header:'状态',name:'status',index:'a.status',width:80,align:'center',formatter:function (val,obj,row,act) {
+                        return js.getDictLabel([{"id":"980614923145252864","createBy":"system","updateDate":"2018-05-13 19:27","status":"0","updateBy":"system","createDate":"2018-05-31 17:58","treeSort":20,"treeSorts":"0000000020,","treeLevel":0,"parentCodes":"0,","treeNames":"正常","treeLeaf":"1","dictType":"sys_status","cssStyle":"","dictLabelOrig":"正常","description":"","isSys":"1","dictCode":"980614923145252864","cssClass":"","dictValue":"0","dictLabel":"正常","isRoot":true,"isTreeLeaf":true,"parentCode":"0"},{"id":"980614923279470592","createBy":"system","updateDate":"2018-05-17 09:41","status":"0","updateBy":"system","createDate":"2018-05-17 09:41","treeSort":30,"treeSorts":"0000000030,","treeLevel":0,"parentCodes":"0,","treeNames":"删除","treeLeaf":"1","dictType":"sys_status","cssStyle":"color:#f00;","dictLabelOrig":"删除","description":"","isSys":"1","dictCode":"980614923279470592","cssClass":"","dictValue":"1","dictLabel":"删除","isRoot":true,"isTreeLeaf":true,"parentCode":"0"},{"id":"980614923279470593","createBy":"system","updateDate":"2018-05-13 19:27","status":"0","updateBy":"system","createDate":"2018-05-31 17:58","treeSort":40,"treeSorts":"0000000040,","treeLevel":0,"parentCodes":"0,","treeNames":"停用","treeLeaf":"1","dictType":"sys_status","cssStyle":"color:#f00;","dictLabelOrig":"停用","description":"","isSys":"1","dictCode":"980614923279470593","cssClass":"","dictValue":"2","dictLabel":"停用","isRoot":true,"isTreeLeaf":true,"parentCode":"0"},{"id":"980614923342385152","createBy":"system","updateDate":"2018-05-13 19:27","status":"0","updateBy":"system","createDate":"2018-05-31 17:58","treeSort":50,"treeSorts":"0000000050,","treeLevel":0,"parentCodes":"0,","treeNames":"冻结","treeLeaf":"1","dictType":"sys_status","cssStyle":"color:#fa0;","dictLabelOrig":"冻结","description":"","isSys":"1","dictCode":"980614923342385152","cssClass":"","dictValue":"3","dictLabel":"冻结","isRoot":true,"isTreeLeaf":true,"parentCode":"0"},{"id":"980614923476602880","createBy":"system","updateDate":"2018-05-13 19:27","status":"0","updateBy":"system","createDate":"2018-05-31 17:58","treeSort":60,"treeSorts":"0000000060,","treeLevel":0,"parentCodes":"0,","treeNames":"待审","treeLeaf":"1","dictType":"sys_status","cssStyle":"","dictLabelOrig":"待审","description":"","isSys":"1","dictCode":"980614923476602880","cssClass":"","dictValue":"4","dictLabel":"待审","isRoot":true,"isTreeLeaf":true,"parentCode":"0"},{"id":"980614923539517440","createBy":"system","updateDate":"2018-05-13 19:27","status":"0","updateBy":"system","createDate":"2018-05-31 17:58","treeSort":70,"treeSorts":"0000000070,","treeLevel":0,"parentCodes":"0,","treeNames":"驳回","treeLeaf":"1","dictType":"sys_status","cssStyle":"","dictLabelOrig":"驳回","description":"","isSys":"1","dictCode":"980614923539517440","cssClass":"","dictValue":"5","dictLabel":"驳回","isRoot":true,"isTreeLeaf":true,"parentCode":"0"},{"id":"980614923606626304","createBy":"system","updateDate":"2018-05-13 19:27","status":"0","updateBy":"system","createDate":"2018-05-31 17:58","treeSort":80,"treeSorts":"0000000080,","treeLevel":0,"parentCodes":"0,","treeNames":"草稿","treeLeaf":"1","dictType":"sys_status","cssStyle":"color:#aaa;","dictLabelOrig":"草稿","description":"","isSys":"1","dictCode":"980614923606626304","cssClass":"","dictValue":"9","dictLabel":"草稿","isRoot":true,"isTreeLeaf":true,"parentCode":"0"}], val, '未知', true);
+                    }},
+                {header:'操作',name:'actions',width:130,sortable:false,title:false,formatter:function (val,obj,row,act) {
+                        var actions = [];
+                        actions.push('<a href="/sys/role/form?roleCode='+row.roleCode+'&op=edit" class="btnList" title="编辑角色"><i class="fa fa-pencil"></i></a>&nbsp;');
+                        if (row.status == Global.STATUS_NORMAL){
+                            actions.push('<a href="/sys/role/disable?roleCode='+row.roleCode+'" class="btnList" title="停用角色" data-confirm="确认要停用该角色吗？"><i class="glyphicon glyphicon-ban-circle"></i></a>&nbsp;');
+                        }
+                        if (row.status == Global.STATUS_DISABLE){
+                            actions.push('<a href="/sys/role/enable?roleCode='+row.roleCode+'" class="btnList" title="启用角色" data-confirm="确认要启用该角色吗？"><i class="glyphicon glyphicon-ok-circle"></i></a>&nbsp;');
+                        }
+                        actions.push('<a href="/sys/role/delete?roleCode='+row.roleCode+'" class="btnList" title="删除角色" data-confirm="确认要删除该角色吗？"><i class="fa fa-trash-o"></i></a>&nbsp;');
+                        actions.push('<a href="javascript:" class="btnMore" title="更多操作"><i class="fa fa-chevron-circle-right"></i></a>&nbsp;');
+                        actions.push('<div class="moreItems">');
+                        actions.push('<a href="/sys/role/form?roleCode='+row.id+'&op=auth" class="btn btn-default btn-xs btnList" title="角色分配功能权限"><i class="fa fa-check-square-o"></i> 功能菜单</a>&nbsp;');
+                        actions.push('<a href="/sys/role/formAuthDataScope?roleCode='+row.id+'" class="btn btn-default btn-xs btnList" title="角色分配数据权限"><i class="fa fa-check-circle-o"></i> 数据权限</a>&nbsp;');
+                        actions.push('<a href="/sys/role/formAuthUser?roleCode='+row.id+'" class="btn btn-default btn-xs btnList" title="角色分配用户"><i class="fa fa-user"></i> 分配用户</a>&nbsp;');
+                        actions.push('</div>');
+                        return actions.join('');
+                    }}
+            ],
+            ajaxSuccess:function (data) {
+
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

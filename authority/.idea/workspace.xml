@@ -1,0 +1,622 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/desktop.html" line="260" mnemonic="9" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="43b91a41-e880-4e7f-81f9-9df862fd15d5" name="Default" comment="" />
+    <ignored path="$PROJECT_DIR$/.tmp/" />
+    <ignored path="$PROJECT_DIR$/temp/" />
+    <ignored path="$PROJECT_DIR$/tmp/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="19">
+              <caret line="18" column="61" selection-start-line="18" selection-start-column="61" selection-end-line="18" selection-end-column="61" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="desktop.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/desktop.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="4446">
+              <caret line="234" column="99" selection-start-line="234" selection-start-column="99" selection-end-line="234" selection-end-column="99" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#2;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#3;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="JavaScript File" />
+        <option value="CSS File" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>this</find>
+      <find>.addTabPage</find>
+      <find>.content-wrapper</find>
+      <find>_</find>
+      <find>岗位</find>
+      <find>WdatePicker</find>
+      <find>layer</find>
+      <find>glyphicons</find>
+      <find>glyphicon</find>
+      <find>font-face</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>.addTabPage</replace>
+      <replace>'.addTabPage'</replace>
+      <replace>-</replace>
+      <replace>部门</replace>
+    </replaceStrings>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/styles/zTreeStyle.css" />
+        <option value="$PROJECT_DIR$/styles/jquery.layout-latest.css" />
+        <option value="$PROJECT_DIR$/scripts/jquery.ztree.all-3.5.js" />
+        <option value="$PROJECT_DIR$/scripts/jquery-ui-draggable-1.21.1.min.js" />
+        <option value="$PROJECT_DIR$/scripts/jquery-ui-effect-1.21.1.min.js" />
+        <option value="$PROJECT_DIR$/scripts/jquery.layout-latest.js" />
+        <option value="$PROJECT_DIR$/scripts/ui.jqgrid.css" />
+        <option value="$PROJECT_DIR$/scripts/jqgrid.js" />
+        <option value="$PROJECT_DIR$/scripts/jqgrid.extend.js" />
+        <option value="$PROJECT_DIR$/scripts/zh_CN.js" />
+        <option value="$PROJECT_DIR$/jqGrid/js/zh_CH.js" />
+        <option value="$PROJECT_DIR$/log_in.html" />
+        <option value="$PROJECT_DIR$/static/jquery-validation/localization/messages_zh_CN.js" />
+        <option value="$PROJECT_DIR$/static/jquery-validation/jquery.validate.extend.js" />
+        <option value="$PROJECT_DIR$/sys/empUser/form.html" />
+        <option value="$PROJECT_DIR$/sys/post/form.html" />
+        <option value="$PROJECT_DIR$/sys/office/form.html" />
+        <option value="$PROJECT_DIR$/sys/tags/treeselect.html" />
+        <option value="$PROJECT_DIR$/sys/empUser/list.html" />
+        <option value="$PROJECT_DIR$/sys/company/office.html" />
+        <option value="$PROJECT_DIR$/sys/company/list.html" />
+        <option value="$PROJECT_DIR$/sys/company/company.html" />
+        <option value="$PROJECT_DIR$/sys/company/form.html" />
+        <option value="$PROJECT_DIR$/sys/role/list.htm;.html" />
+        <option value="$PROJECT_DIR$/sys/role/form.html" />
+        <option value="$PROJECT_DIR$/sys/secAdmin/list.html" />
+        <option value="$PROJECT_DIR$/homepage.html" />
+        <option value="$PROJECT_DIR$/static/global.js" />
+        <option value="$PROJECT_DIR$/desktop.html" />
+        <option value="$PROJECT_DIR$/sys/empUser/index.html" />
+        <option value="$PROJECT_DIR$/switchSkin/select.html" />
+        <option value="$PROJECT_DIR$/sys/post/list.html" />
+        <option value="$PROJECT_DIR$/sys/online/list.html" />
+        <option value="$PROJECT_DIR$/sys/online/userSelect.html" />
+        <option value="$PROJECT_DIR$/sys/office/list.html" />
+        <option value="$PROJECT_DIR$/sys/role/list.html" />
+        <option value="$PROJECT_DIR$/sys/msg/list.html" />
+        <option value="$PROJECT_DIR$/static/jquery-plugins/jquery.strength.css" />
+        <option value="$PROJECT_DIR$/static/modules/sys/userInfo.css" />
+        <option value="$PROJECT_DIR$/sys/user/info.html" />
+        <option value="$PROJECT_DIR$/static/icheck/square/blue.css" />
+        <option value="$PROJECT_DIR$/sys/account/forgetPwd.html" />
+        <option value="$PROJECT_DIR$/static/common/des.js.css" />
+        <option value="$PROJECT_DIR$/static/common/des.js" />
+        <option value="$PROJECT_DIR$/static/modules/sys/sysLogin.js" />
+        <option value="$PROJECT_DIR$/static/bootstrap/css/bootstrap.min.css" />
+        <option value="$PROJECT_DIR$/static/bootstrap/css/bootstrap.css" />
+        <option value="$PROJECT_DIR$/static/modules/sys/sysLogin.css" />
+        <option value="$PROJECT_DIR$/login.html" />
+        <option value="$PROJECT_DIR$/static/jquery/jquery.min.js" />
+        <option value="$PROJECT_DIR$/index.html" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
+  </component>
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths />
+  </component>
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="10" />
+    <option name="y" value="20" />
+    <option name="width" value="1260" />
+    <option name="height" value="944" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="authority" type="b2602c69:ProjectViewProjectNode" />
+              <item name="authority" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="authority" type="b2602c69:ProjectViewProjectNode" />
+              <item name="authority" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="authority" type="b2602c69:ProjectViewProjectNode" />
+              <item name="authority" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="jquery" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="authority" type="b2602c69:ProjectViewProjectNode" />
+              <item name="authority" type="462c0819:PsiDirectoryNode" />
+              <item name="sys" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="SearchEverywhereHistoryKey" value="mainFrame&#9;null&#9;null" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../new authority" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="JavaScript.Libraries" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\WebStorm\authority\static\icheck\minimal" />
+      <recent name="F:\WebStorm\authority\static\layer\skin\default" />
+      <recent name="F:\WebStorm\authority\static\my97\skin" />
+      <recent name="F:\WebStorm\authority\static\jquery" />
+      <recent name="F:\WebStorm\authority\static\jquery-ztree\js" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\WebStorm\authority\static\icheck\square" />
+      <recent name="F:\WebStorm\authority\static\bootstrap\fonts" />
+      <recent name="F:\WebStorm\authority\static\fonts\fonts" />
+      <recent name="F:\WebStorm\authority\sys\office" />
+      <recent name="F:\WebStorm\authority\static\jquery-validation" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="43b91a41-e880-4e7f-81f9-9df862fd15d5" name="Default" comment="" />
+      <created>1529372328466</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1529372328466</updated>
+      <workItem from="1529372330637" duration="12778000" />
+      <workItem from="1529456057808" duration="481000" />
+      <workItem from="1529456569896" duration="7206000" />
+      <workItem from="1529474086547" duration="3207000" />
+      <workItem from="1529477785434" duration="8437000" />
+      <workItem from="1529542392739" duration="7639000" />
+      <workItem from="1529562605939" duration="221000" />
+      <workItem from="1529563039443" duration="2000" />
+      <workItem from="1529563087021" duration="1416000" />
+      <workItem from="1529628306455" duration="17716000" />
+      <workItem from="1529658904465" duration="2725000" />
+      <workItem from="1529887860144" duration="20530000" />
+      <workItem from="1529975766074" duration="8361000" />
+      <workItem from="1529986512117" duration="9000" />
+      <workItem from="1529993539270" duration="11753000" />
+      <workItem from="1530062997862" duration="12587000" />
+      <workItem from="1530147037611" duration="21341000" />
+      <workItem from="1530233261969" duration="17287000" />
+      <workItem from="1530263065826" duration="86000" />
+      <workItem from="1530492977725" duration="9690000" />
+      <workItem from="1530511724453" duration="6297000" />
+      <workItem from="1530579462826" duration="289000" />
+      <workItem from="1530580129802" duration="9041000" />
+      <workItem from="1530597863904" duration="12294000" />
+      <workItem from="1530665956394" duration="9464000" />
+      <workItem from="1530684379011" duration="4994000" />
+      <workItem from="1530689922224" duration="7631000" />
+      <workItem from="1530752724817" duration="21304000" />
+      <workItem from="1530838937260" duration="19102000" />
+      <workItem from="1530872625230" duration="1016000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="254904000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1296" height="1000" extended-state="6" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24244833" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" weight="0.32908458" />
+      <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.32908458" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32908458" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/sys/company/office.html" />
+    <entry file="file://$PROJECT_DIR$/sys/company/company.html" />
+    <entry file="file://$PROJECT_DIR$/sys/tags/treeselect.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="115">
+          <caret line="153" column="41" lean-forward="true" selection-start-line="153" selection-start-column="41" selection-end-line="153" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sys/role/list.htm;.html" />
+    <entry file="file://$PROJECT_DIR$/sys/company/form.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3876">
+          <caret line="448" column="54" selection-start-line="448" selection-start-column="54" selection-end-line="448" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/common/jeesite.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="7" column="5945" selection-start-line="7" selection-start-column="5945" selection-end-line="7" selection-end-column="5945" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sys/role/form.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1653">
+          <caret line="141" column="40" lean-forward="true" selection-start-line="141" selection-start-column="40" selection-end-line="141" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sys/office/form.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="300" column="57" lean-forward="true" selection-start-line="300" selection-start-column="57" selection-end-line="300" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sys/secAdmin/list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="703">
+          <caret line="81" column="63" selection-start-line="81" selection-start-column="63" selection-end-line="81" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/global.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="30" lean-forward="true" selection-start-column="30" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/scripts/basevalue.js" />
+    <entry file="file://$PROJECT_DIR$/static/scripts/echarts.common.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="16" column="45" selection-start-line="16" selection-start-column="45" selection-end-line="16" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sys/empUser/form.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="254" column="18" selection-start-line="254" selection-start-column="18" selection-end-line="254" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sys/empUser/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-289">
+          <caret line="39" column="104" lean-forward="true" selection-start-line="39" selection-start-column="104" selection-end-line="39" selection-end-column="104" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/scripts/hm.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="35" selection-start-column="35" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/fonts/font-icons.min.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="1" column="474" selection-start-line="1" selection-start-column="474" selection-end-line="1" selection-end-column="474" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/my97/WdatePicker.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-293">
+          <caret column="168" selection-start-column="168" selection-end-column="168" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/fonts/fonts/fontawesome-webfont.woff" />
+    <entry file="file://$PROJECT_DIR$/static/fonts/fonts/fontawesome-webfont.woff2">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/switchSkin/select.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4389">
+          <caret line="231" column="7" lean-forward="true" selection-start-line="231" selection-start-column="7" selection-end-line="231" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sys/post/list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="665">
+          <caret line="35" selection-start-line="35" selection-end-line="38" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sys/post/form.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2755">
+          <caret line="145" column="34" lean-forward="true" selection-start-line="145" selection-start-column="34" selection-end-line="145" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sys/empUser/list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6099">
+          <caret line="321" selection-start-line="321" selection-end-line="332" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sys/online/userSelect.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="570">
+          <caret line="169" column="30" selection-start-line="169" selection-start-column="30" selection-end-line="169" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sys/online/list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3040">
+          <caret line="160" selection-start-line="160" selection-end-line="171" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sys/office/list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="6" column="45" selection-start-line="6" selection-start-column="45" selection-end-line="6" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sys/role/list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="437">
+          <caret line="23" column="65" selection-start-line="23" selection-start-column="65" selection-end-line="23" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sys/company/list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="118" selection-start-line="118" selection-end-line="154" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/common/jeesite.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="570">
+          <caret line="5" column="3982" selection-start-line="5" selection-start-column="3982" selection-end-line="5" selection-end-column="3982" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/jquery-plugins/jquery.strength.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="1220" selection-start-column="1220" selection-end-column="1220" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/modules/sys/userInfo.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="142" selection-start-column="142" selection-end-column="142" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sys/user/info.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="373" column="26" lean-forward="true" selection-start-line="373" selection-start-column="26" selection-end-line="373" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sys/msg/list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="79" selection-start-line="79" selection-end-line="90" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/log_in.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="4" column="58" lean-forward="true" selection-start-line="4" selection-start-column="58" selection-end-line="4" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sys/account/forgetPwd.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="4" column="16" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/common/des.js.css" />
+    <entry file="file://$PROJECT_DIR$/static/common/des.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="11" column="10887" selection-start-line="11" selection-start-column="10887" selection-end-line="11" selection-end-column="10887" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/modules/sys/sysLogin.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="6" column="866" selection-start-line="6" selection-start-column="866" selection-end-line="6" selection-end-column="866" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/bootstrap/css/bootstrap.min.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="4" column="3021" selection-start-line="4" selection-start-column="3012" selection-end-line="4" selection-end-column="3021" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/bootstrap/css/bootstrap.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="262" column="26" lean-forward="true" selection-start-line="262" selection-start-column="26" selection-end-line="262" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/modules/sys/sysLogin.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="1199" selection-start-column="1199" selection-end-column="1199" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/icheck/square/blue.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="1152" selection-start-column="1152" selection-end-column="1152" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/icheck/square/blue.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="670">
+          <caret line="80" column="44" lean-forward="true" selection-start-line="80" selection-start-column="44" selection-end-line="80" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/desktop.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4446">
+          <caret line="234" column="99" selection-start-line="234" selection-start-column="99" selection-end-line="234" selection-end-column="99" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#2;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#3;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/modules/sys/sysIndex.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="1267" selection-start-column="1267" selection-end-column="1267" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/adminlte/AdminLTE.min.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="505">
+          <caret line="385" column="1" selection-start-line="385" selection-start-column="1" selection-end-line="385" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/adminlte/skin/skin-blue-light.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="1109" selection-start-column="1109" selection-end-column="1109" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/lib/webstorm.jar!/resources/html5-schema/html5/structural.rnc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="92" column="21" selection-start-line="92" selection-start-column="21" selection-end-line="92" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/jquery/jquery.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="2" column="286" selection-start-line="2" selection-start-column="286" selection-end-line="2" selection-end-column="286" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="18" column="61" selection-start-line="18" selection-start-column="61" selection-end-line="18" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

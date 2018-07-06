@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta content="webkit" name="renderer">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta content="width=device-width,initial-scale=1,user-scalable=1" name="viewport">
+    <meta content="权限管理" name="description">
+    <meta content="LaiYY" name="author">
+    <title>消息管理</title>
+    <script src="../../static/global.js"></script>
+    <script src="../../static/jquery/jquery.min.js"></script>
+    <script src="../../static/jquery/jquery-migrate-1.4.1.min.js"></script>
+    <link rel="stylesheet" href="../../static/fonts/font-icons.min.css">
+    <link rel="stylesheet" href="../../static/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../../static/select2/select2.css">
+    <link rel="stylesheet" href="../../static/icheck/minimal/grey.css">
+    <link rel="stylesheet" href="../../static/jqGrid/css/ui.jqgrid.css">
+    <link rel="stylesheet" href="../../static/adminlte/AdminLTE.min.css">
+    <link rel="stylesheet" href="../../static/common/jeesite.css">
+    <link rel="stylesheet" href="../../static/common/common.css">
+</head>
+<body class="hold-transition">
+    <div class="wrapper">
+        <div class="main-content">
+            <div class="box box-main nav-tabs-custom nav-main">
+                <div class="box-header pull-right">
+                    <div class="box-tools pull-right">
+                        <a href="#" class="btn btn-default" id="btnSearch" title="查询"><i class="fa fa-filter"></i> 查询</a>
+                        <a href="#" class="btn btn-default" id="btnReadAllMsg" title="全部标记为已读"><i class="fa fa-eye"></i> 全部标记为已读</a>
+                    </div>
+                </div>
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="/sys/msg/list"><i class="fa icon-envelope"></i> 未读消息</a></li>
+                    <li class=""><a href="/sys/msg/list?pushed=true"><i class="fa icon-envelope-letter"></i> 已读消息</a></li>
+                </ul>
+                <div class="box-body">
+                    <form id="searchForm" action="/sys/msg/listData" method="post" class="form-inline hide" data-page-no="" data-page-size="" data-order-by="">
+                        <input type="hidden" id="pushed" name="pushed" value="false">
+                        <div class="form-group">
+                            <label class="control-label">消息标题：</label>
+                            <div class="control-inline">
+                                <input type="text" id="msgTitle" name="msgTitle" value="" maxlength="200" class="form-control width-120">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">消息内容：</label>
+                            <div class="control-inline">
+                                <input type="text" id="msgContent" name="msgContent" value="" class="form-control width-120">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">发送者编码：</label>
+                            <div class="control-inline">
+                                <input type="text" id="sendUserCode" name="sendUserCode" value="" maxlength="64" class="form-control width-90">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">发送时间：</label>
+                            <div class="control-inline">
+                                <input type="text" id="sendData_gte" name="sendDate_gte" value="" readonly="true" maxlength="20" class="form-control Wdate-date" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false,onpicked:function() {sendDate_lte.click()}});">
+                                &nbsp;--&nbsp;
+                                <input type="text" id="sendDate_lte" name="sendDate_lte" value="" readonly="true" maxlength="20" class="form-control Wdate-date" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-sm">查询</button>
+                            <button type="reset" class="btn btn-default btn-sm">重置</button>
+                        </div>
+                    </form>
+                    <table id="dataGrid"></table>
+                    <div id="dataGridPage"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a id="scroll-up" href="#" class="btn btn-sm"><i class="fa fa-angle-double-up"></i></a>
+    <script src="../../static/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../../static/select2/select2.js"></script>
+    <script src="../../static/select2/zh_CN.js"></script>
+    <script src="../../static/layer/layer.js"></script>
+    <script src="../../static/my97/WdatePicker.js"></script>
+    <script src="../../static/jqGrid/js/jqgrid.js"></script>
+    <script src="../../static/jqGrid/js/jqgrid.extend.js"></script>
+    <script src="../../static/jqGrid/js/zh_CH.js"></script>
+    <script src="../../static/common/jeesite.js"></script>
+    <script src="../../static/common/jeesite_zh_CN.js"></script>
+    <script src="../../static/common/common.js"></script>
+    <script>
+        $('#dataGrid').dataGrid({
+            searchForm:$("#searchForm"),
+            columnModel:[
+                {header:'消息标题',name:'msgTitle',index:'a.msg_title',width:150,align:'left',formatter:function (val,obj,row,act) {
+                        return '<a href="javascript:" onclick="return readMsg($(this))" data-msg-id="'+row.id+'" data-row-id="'+obj.rowId+'">'+(val||row.id)+'</a>';
+                    }},
+                {header:'消息内容',name:'msgContentEntity.content',index:'a.msg_content',width:220,align:'left',formatter:function (val,obj,row,act) {
+                        return '<a href="javascript:" onclick="return readMsg($(this))" data-msg-id="'+row.id+'" data-row-id="'+obj.rowId+'">'+(val||row.id)+'</a>';
+                    }},
+                {header:'发送者',name:'sendUserName',index:'a.send_user_name',width:150,align:'center'},
+                {header:'发送时间',name:'sendDate',index:'a.send_date',width:150,align:'center'},
+                {header:'延迟推送',name:'isMergePush',index:'a.is_merge_push',hidden:true,width:60,align:'center',formatter:function (val,obj,row,act) {
+                        return js.getDictLabel([{"id":"980614922755182592","createBy":"system","updateDate":"2018-04-02 09:16","status":"0","updateBy":"system","createDate":"2018-04-02 09:16","treeSort":30,"treeSorts":"0000000030,","treeLevel":0,"parentCodes":"0,","treeNames":"是","treeLeaf":"1","dictType":"sys_yes_no","cssStyle":"","dictLabelOrig":"是","description":"","isSys":"1","dictCode":"980614922755182592","cssClass":"","dictValue":"1","dictLabel":"是","isRoot":true,"isTreeLeaf":true,"parentCode":"0"},{"id":"980614923082338304","createBy":"system","updateDate":"2018-04-02 09:16","status":"0","updateBy":"system","createDate":"2018-04-02 09:16","treeSort":40,"treeSorts":"0000000040,","treeLevel":0,"parentCodes":"0,","treeNames":"否","treeLeaf":"1","dictType":"sys_yes_no","cssStyle":"color:#aaa;","dictLabelOrig":"否","description":"","isSys":"1","dictCode":"980614923082338304","cssClass":"","dictValue":"0","dictLabel":"否","isRoot":true,"isTreeLeaf":true,"parentCode":"0"}], val, '未知', true);
+                    }},
+            ],
+            ajaxSuccess:function (data) {
+
+            }
+        });
+        $('#btnReadAllMsg').click(function () {
+            js.confirm("是否将全部未读信息标记为已读?",function () {
+                js.ajaxSubmit("/sys/msg/readAllMsg",function (data) {
+                    js.showMessage(data.message);
+                    location.href = location.href;
+                });
+            });
+            return false;
+        });
+        function readMsg($this) {
+            js.addTabPage($this,"查看消息",'/sys/msg/readMsg?id=' + $this.data('msgId') + '&pushed=false');
+            if(!false){
+                $('#dataGrid').dataGrid('delRowData',$this.data('rowId'));
+            }
+            return false;
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

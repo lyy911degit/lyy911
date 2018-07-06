@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="static/styles/login.css">
+    <script type="text/javascript" src="static/scripts/basevalue.js"></script>
+    <script type="text/javascript" src="static/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="static/scripts/user.js" charset="utf-8"></script>
+    <title>登录</title>
+</head>
+<body>
+    <div class="global">
+        <div class="title">
+            <h1>通用权限管理系统</h1>
+        </div>
+        <div class="login_box">
+            <form>
+                <div class="letter">
+                    <input type="text" placeholder="请输入账号" id="account" data-msg-required="请填写登录账号" tabindex="1">
+                    <span id="account_span"></span>
+                </div>
+                <div class="letter">
+                    <input type="password" placeholder="请输入密码" id="password" tabindex="2">
+                    <span id="password_span"></span>
+                    <div class="letter">
+                        <input type="button" id="login" value="立即登录" tabindex="3">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="login_copyright">
+            © 2018 LYY's Demo - Powered By 赖亚运.
+        </div>
+    </div>
+</body>
+</html>

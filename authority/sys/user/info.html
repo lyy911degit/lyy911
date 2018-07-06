@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta content="webkit" name="renderer">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta content="width=device-width,initial-scale=1,user-scalable=1" name="viewport">
+    <meta content="权限管理" name="description">
+    <meta content="LaiYY" name="author">
+    <title>消息管理</title>
+    <script src="../../static/global.js"></script>
+    <script src="../../static/jquery/jquery.min.js"></script>
+    <script src="../../static/jquery/jquery-migrate-1.4.1.min.js"></script>
+    <link rel="stylesheet" href="../../static/fonts/font-icons.min.css">
+    <link rel="stylesheet" href="../../static/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../../static/select2/select2.css">
+    <link rel="stylesheet" href="../../static/icheck/minimal/grey.css">
+    <link rel="stylesheet" href="../../static/jqGrid/css/ui.jqgrid.css">
+    <link rel="stylesheet" href="../../static/adminlte/AdminLTE.min.css">
+    <link rel="stylesheet" href="../../static/common/jeesite.css">
+    <link rel="stylesheet" href="../../static/common/common.css">
+</head>
+<body class="hold-transition">
+    <div class="wrapper">
+        <link rel="stylesheet" href="../../static/jquery-plugins/jquery.strength.css">
+        <link rel="stylesheet" href="../../static/modules/sys/userInfo.css">
+        <div class="main-content">
+            <div class="nav-tabs-custom nav-main">
+                <ul class="nav nav-tabs pull-right">
+                    <li class=""><a href="#tab-3" data-toggle="tab">修改密保</a></li>
+                    <li class=""><a href="#tab-2" data-toggle="tab">修改密码</a></li>
+                    <li class="active"><a href="#tab-1" data-toggle="tab">个人信息</a></li>
+                    <li class="pull-left header">
+                        <i class="fa icon-user" style="vertical-align: -1px;"></i>个人中心
+                    </li>
+                </ul>
+                <div class="tab-content p0">
+                    <div class="tab-pane active" id="tab-1">
+                        <form id="inputFormBase" action="/sys/user/infoSaveBase" method="post" class="form-horizontal">
+                            <div class="box-body"><br>
+                                <div class="col-sm-offset-1 col-sm-3"><br>
+                                    <div class="box box-main">
+                                        <div class="box-body box-profile">
+                                            <img id="avatarImg" class="profile-user-img img-responsive img-circle" src="/userfiles/avatar/0/none/admin.jpg">
+                                            <h3 class="profile-username text-center">管理员</h3>
+                                            <p class="text-muted text-center">
+                                                <span id="sex" class="icheck">
+                                                    <label>
+                                                        <input type="radio" id="sex1" name="sex" value="1" class="form-control required" checked>男
+                                                    </label>
+                                                    <label>
+                                                        <input type="radio" id="sex2" name="sex" value="2" class="form-control required" checked>女
+                                                    </label>
+                                                </span>
+                                            </p>
+                                            <input id="avatarBase64" name="avatarBase64" type="hidden" value="" class="">
+                                            <a id="avatarBase64Button" href="javascript:" class="btn btn-default btn-block">修改头像</a>
+                                            <script>
+                                                $("#avatarBase64Button,#avatarImg").click(function () {
+                                                    js.layer.open({
+                                                        type:2,
+                                                        maxmin:true,
+                                                        title:'图片裁剪',
+                                                        area:[(js.layer.$(js.layer.window).width() - 150) + 'px',(js.layer.$(js.layer.window).height() - 100) + 'px'],
+                                                        content:'/sys/tags/imageclip',
+                                                        contentFormData:{
+                                                            circle:'true',
+                                                            imageSrc:$("#avatarImg").attr('src'),
+                                                            imageDefaultSrc:'/static/images/user1.jpg',
+                                                        },
+                                                        btn:['<i class="fa fa-check"></i> 确定','<i class="fa fa-eraser"></i> 清除','<i class="fa fa-close"></i> 关闭'],
+                                                        btn1:function(index,layero){
+                                                            var win = js.layer.iframeWindow(index);
+                                                            win.$("#btnGetImageBase64").click();
+                                                            $("#avatarImg").attr("src",win.imageBase64);
+                                                            $("#avatarBase64").val(win.imageBase64).change();
+                                                            try{
+                                                                $('#avatarBase64').valid();
+                                                            }catch (e){}
+                                                        },
+                                                        btn2:function (index,layero) {
+                                                            $("#avatarImg").attr("src","/static/images/user1.jpg");
+                                                            $("#avatarBase64").val("EMPTY").change();
+                                                        }
+                                                    });
+                                                });
+                                            </script>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-7"><br>
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-3">
+                                                    <span class="required">*</span>用户昵称：
+                                                </label>
+                                                <div class="col-sm-9">
+                                                    <div class="input-group">
+                                                        <input type="text" id="userName" name="userName" value="" maxlength="32" class="form-control required">
+                                                        <span class="input-group-addon"><i class="fa fa-fw fa-user" style="margin-top: -2px;display: block;"></i></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-3" title="">
+                                                    <span class="required hide">*</span>电子邮箱：<i class="fa icon-question hide"></i>
+                                                </label>
+                                                <div class="col-sm-9">
+                                                    <div class="input-group">
+                                                        <input type="text" id="email" name="email" value="" maxlength="300" class="form-control email">
+                                                        <span class="input-group-addon"><i class="fa fa-fw fa-envelope" style="margin-top: -2px;display: block;"></i></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-3" title="">
+                                                    <span class="required hide">*</span>手机号码：<i class="fa icon-question hide"></i>
+                                                </label>
+                                                <div class="col-sm-9">
+                                                    <div class="input-group">
+                                                        <input type="text" id="mobile" name="mobile" value="" maxlength="100" class="form-control mobile">
+                                                        <span class="input-group-addon"><i class="fa fa-fw fa-mobile" style="margin-top: -2px;display: block;"></i></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-3" title="">
+                                                    <span class="required hide">*</span>办公电话：<i class="fa icon-question hide"></i>
+                                                </label>
+                                                <div class="col-sm-9">
+                                                    <div class="input-group">
+                                                        <input type="text" id="phone" name="phone" value="" maxlength="100" class="form-control phone">
+                                                        <span class="input-group-addon"><i class="fa fa-fw fa-phone" style="margin-top: -2px;display: block;"></i></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-3" title="">
+                                                    <span class="required hide">*</span>个性签名：<i class="fa icon-question hide"></i>
+                                                </label>
+                                                <div class="col-sm-9">
+                                                    <textarea id="sign" name="sign" row="3" maxlength="100" class="form-control"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <div class="form-group">
+                                                <label class="control-label col-sm-3" title="">上次登录：</label>
+                                                <div class="col-sm-9 pt3"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><br>
+                            </div>
+                            <div class="box-footer">
+                                <div class="row mr20 pr20">
+                                    <div class="text-center mr20 pr20">
+                                        <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-check"></i> 保 存</button>&nbsp;
+                                        <button type="button" class="btn btn-default btn-sm" onclick="js.closeCurrentTabPage()"><i class="fa fa-reply-all"></i> 关 闭</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="tab-pane" id="tab-2">
+                        <form id="inputFormPwd" action="/sys/user/infoSavePwd" method="post" class="form-horizontal">
+                            <div class="box-body">
+                                <div class="form-unit">修改密码</div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-3">旧密码：</label>
+                                            <div class="col-sm-8">
+                                                <input id="oldPassword" name="oldPassword" type="password" autocomplete="off" value="" maxlength="50" minlength="3" class="form-control required">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-3">新密码：</label>
+                                            <div class="col-sm-8">
+                                                <div class="strength strength-loose">
+                                                    <input id="newPassword" name="newPassword" type="password" autocomplete="off" value="" maxlength="50" minlength="3" class="form-control required">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-3">确认新密码：</label>
+                                            <div class="col-sm-8">
+                                                <input id="confirmNewPassword" name="confirmNewPassword" type="password" autocomplete="off" value="" maxlength="50" minlength="3" class="form-control required" equalTo="#newPassword">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box-footer">
+                                <div class="row">
+                                    <div class="col-sm-offset-3 col-sm-10">
+                                        <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-check"></i> 保 存</button>&nbsp;
+                                        <button type="button" class="btn btn-default btn-sm" onclick="js.closeCurrentTabPage()"><i class="fa fa-reply-all"></i> 关 闭</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="tab-pane" id="tab-3">
+                        <form id="inputFormPqa" action="/sys/user/infoSavePqa" method="post" class="form-horizontal">
+                            <div class="box-body">
+                                <div class="alert alert-dismissable callout callout-info ml10 mr10 mt10">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+                                    <p><i class="icon fa fa-info"></i> 您还未设置过密保问题，您可以根据登录密码设置新的密保问题及答案。</p>
+                                </div><br>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-3">登录密码：</label>
+                                            <div class="col-sm-8">
+                                                <input id="validPassword" name="validPassword" type="password" autocomplete="off" value="" maxlength="50" minlength="3" class="form-control required">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-unit">新的密保问题及答案</div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-3">新密保问题（1）：</label>
+                                            <div class="col-sm-8">
+                                                <input id="pwdQuestion" name="pwdQuestion" type="text" value="" maxlength="50" minlength="1" class="form-control required">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-3">新密保问题答案（1）：</label>
+                                            <div class="col-sm-8">
+                                                <input id="pwdQuestionAnswer" name="pwdQuestionAnswer" type="text" value="" maxlength="50" minlength="1" class="form-control required">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-3">新密保问题（2）：</label>
+                                            <div class="col-sm-8">
+                                                <input id="pwdQuestion2" name="pwdQuestion2" type="text" value="" maxlength="50" minlength="1" class="form-control required">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-3">新密保问题答案（2）：</label>
+                                            <div class="col-sm-8">
+                                                <input id="pwdQuestionAnswer2" name="pwdQuestionAnswer2" type="text" value="" maxlength="50" minlength="1" class="form-control required">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-3">新密保问题（3）：</label>
+                                            <div class="col-sm-8">
+                                                <input id="pwdQuestion3" name="pwdQuestion3" type="text" value="" maxlength="50" minlength="1" class="form-control required">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-3">新密保问题答案（3）：</label>
+                                            <div class="col-sm-8">
+                                                <input id="pwdQuestionAnswer3" name="pwdQuestionAnswer3" type="text" value="" maxlength="50" minlength="1" class="form-control required">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box-footer">
+                                <div class="row">
+                                    <div class="col-sm-offset-3 col-sm-10">
+                                        <button type="submit" class="btn btn-primary btn-sm"> 保 存</button>&nbsp;
+                                        <button type="button" class="btn btn-default btn-sm" onclick="js.closeCurrentTabPage()"><i class="fa fa-reply-all"></i> 关 闭</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a id="scroll-up" href="#" class="btn btn-sm"><i class="fa fa-angle-double-up"></i></a>
+    <script src="../../static/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../../static/select2/select2.js"></script>
+    <script src="../../static/select2/zh_CN.js"></script>
+    <script src="../../static/layer/layer.js"></script>
+    <script src="../../static/my97/WdatePicker.js"></script>
+    <script src="../../static/jqGrid/js/jqgrid.js"></script>
+    <script src="../../static/jqGrid/js/jqgrid.extend.js"></script>
+    <script src="../../static/jqGrid/js/zh_CH.js"></script>
+    <script src="../../static/common/jeesite.js"></script>
+    <script src="../../static/common/jeesite_zh_CN.js"></script>
+    <script src="../../static/common/common.js"></script>
+    <script>
+        $("#inputFormBase").validate({
+            submitHandler:function (form) {
+                js.ajaxSubmitForm($(form),function (data) {
+                    js.showMessage(data.message);
+                    if(data.result == Global.TRUE){
+                        location = '/sys/user/info?op=base';
+                    }
+                },"json");
+            }
+        });
+        $("#sex input").on('ifCreated ifChecked',function () {
+            if($(this).is(":checked")){
+                var s = $('#avatarImg').attr('src');
+                var m = '/static/images/user1.jpg';
+                var w = '/static/images/user2.jpg';
+                if(s == m || s == w){
+                    $('#avatarImg').attr('src',"/static/images/user" + $(this).val() + ".jpg");
+                }
+            }
+        });
+        $("#newPassword").strength();
+        $("#inputFormPwd").validate({
+            submitHandler:function (form) {
+                var oldPassword = $("#oldPassword").val(),newPassword = $("#newPassword").val(),confirmNewPassword = $("#confirmNewPassword").val(),secretKey = 'Lyy';
+                if(secretKey != ''){
+                    $('#oldPassword').val(DesUtils.encode(oldPassword,secretKey));
+                    $('#newPassword').val(DesUtils.encode(newPassword,secretKey));
+                    $('#confirmNewPassword').val(DesUtils.encode(confirmNewPassword,secretKey));
+                }
+                js.ajaxSubmitForm($(form),function (data) {
+                    js.showMessage(data.message);
+                    if(data.result == Global.TRUE){
+                        if('' != ''){
+                            location = '/js';
+                        }else{
+                            location = '/sys/user/info?op=pwd';
+                        }
+                    }
+                },"json");
+                $("#oldPassword").val(oldPassword);
+                $("#newPassword").val(newPassword);
+                $("#confirmNewPassword").val(confirmNewPassword);
+            }
+        });
+        $("#inputFormPqa").validate({
+            submitHandler:function (form) {
+                var validPassword = $('#validPassword').val(),
+                    oldPwdQuestionAnswer = $('#oldPwdQuestionAnswer').val(),
+                    oldPwdQuestionAnswer2 = $('#oldPwdQuestionAnswer2').val(),
+                    oldPwdQuestionAnswer3 = $('#oldPwdQuestionAnswer3').val(),
+                    pwdQuestionAnswer = $('#pwdQuestionAnswer').val(),
+                    pwdQuestionAnswer2 = $('#pwdQuestionAnswer2').val(),
+                    pwdQuestionAnswer3 = $('#pwdQuestionAnswer3').val(),
+                    secretKey = 'Lyy';
+                if(secretKey != ""){
+                    $('#validPassword').valid(DesUtils.encode(validPassword,secretKey));
+                    $('#oldPwdQuestionAnswer').valid(DesUtils.encode(oldPwdQuestionAnswer,secretKey));
+                    $('#oldPwdQuestionAnswer2').valid(DesUtils.encode(oldPwdQuestionAnswer2,secretKey));
+                    $('#oldPwdQuestionAnswer3').valid(DesUtils.encode(oldPwdQuestionAnswer3,secretKey));
+                    $('#pwdQuestionAnswer').valid(DesUtils.encode(pwdQuestionAnswer,secretKey));
+                    $('#pwdQuestionAnswer2').valid(DesUtils.encode(pwdQuestionAnswer2,secretKey));
+                    $('#pwdQuestionAnswer3').valid(DesUtils.encode(pwdQuestionAnswer3,secretKey));
+                }
+                js.ajaxSubmitForm($(form),function (data) {
+                    js.showMessage(data.message);
+                    if(data.result == Global.TRUE){
+                        location = '/sys/user/info?op=pqa';
+                    }
+                },"json");
+                $('#validPassword').val(validPassword);
+                $('#oldPwdQuestionAnswer').val(oldPwdQuestionAnswer);
+                $('#oldPwdQuestionAnswer2').val(oldPwdQuestionAnswer2);
+                $('#oldPwdQuestionAnswer3').val(oldPwdQuestionAnswer3);
+                $('#pwdQuestionAnswer').val(pwdQuestionAnswer);
+                $('#pwdQuestionAnswer2').val(pwdQuestionAnswer2);
+                $('#pwdQuestionAnswer3').val(pwdQuestionAnswer3);
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="webkit" name="renderer">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta content="width=device-width,initial-scale=1,user-scalable=1" name="viewport">
+    <meta content="权限管理" name="description">
+    <meta content="LaiYY" name="author">
+    <title>岗位管理</title>
+    <script src="../../static/global.js"></script>
+    <script src="../../static/jquery/jquery.min.js"></script>
+    <script src="../../static/jquery/jquery-migrate-1.4.1.min.js"></script>
+    <link rel="stylesheet" href="../../static/fonts/font-icons.min.css">
+    <link rel="stylesheet" href="../../static/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../../static/select2/select2.css">
+    <link rel="stylesheet" href="../../static/icheck/minimal/grey.css">
+    <link rel="stylesheet" href="../../static/jqGrid/css/ui.jqgrid.css">
+    <link rel="stylesheet" href="../../static/adminlte/AdminLTE.min.css">
+    <link rel="stylesheet" href="../../static/common/jeesite.css">
+    <link rel="stylesheet" href="../../static/common/common.css">
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement('script');
+            hm.src = "../../scripts/hm.js";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm,s);
+        })();
+    </script>
+</head>
+<body class="hold-transition">
+    <div class="wrapper">
+        <div class="main-content">
+            <div class="box box-main">
+                <div class="box-header">
+                    <div class="box-title">
+                        <i class="fa icon-trophy"></i>
+                        新增岗位
+                    </div>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <form id="inputForm" action="/sys/post/save" method="post" class="form-horizontal">
+                    <div class="box-body">
+                        <div class="form-unit">基本信息</div>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4" title="">
+                                        <span class="required">*</span>
+                                        岗位名称：<i class="fa icon-question hide"></i>
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input type="hidden" id="oldRoleName" name="oldRoleName" value="">
+                                        <input type="text" id="postName" name="postName" value="" maxlength="100" class="form-control required" remote="/sys/post/checkPostName?oldPostName=" data-msg-remote="岗位名称已存在">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4"title="">
+                                        <span class="required">*</span>
+                                        岗位编码：<i class="fa icon-question hide"></i>
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input type="hidden" id="isNewRecord" name="isNewRecord" value="true">
+                                        <input type="text" id="postCode" name="postCode" value="" maxlength="64" class="form-control required abc">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4"title="">
+                                        <span class="required hide">*</span>
+                                        岗位分类：<i class="fa icon-question hide"></i>
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <select id="postType" name="postType" class="form-control">
+                                            <option value="">&nbsp;</option>
+                                            <option value="1">高管</option>
+                                            <option value="2">中层</option>
+                                            <option value="3">基层</option>
+                                            <option value="4">其他</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-4"title="">
+                                        <span class="required hide">*</span>
+                                        排序号：<i class="fa icon-question hide"></i>
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input type="text" id="postSort" value="50" maxlength="10" class="form-control digits">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2"title="">
+                                        <span class="required hide">*</span>
+                                        备注信息：<i class="fa icon-question hide"></i>
+                                    </label>
+                                    <div class="col-sm-10">
+                                        <textarea id="remarks" name="remarks" row="4" maxlength="500" class="form-control"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-footer">
+                        <div class="row">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-sm btn-primary" id="btnSubmit"><i class="fa fa-check"></i>保 存</button>&nbsp;
+                                <button type="button" class="btn btn-sm btn-default" id="btnCancel" onclick="js.closeCurrentTabPage()"><i class="fa fa-reply-all"></i>关 闭</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <a id="scroll-up" href="#" class="btn btn-sm"><i class="fa fa-angle-double-up"></i></a>
+    <script src="../../static/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../../static/select2/select2.js"></script>
+    <script src="../../static/select2/zh_CN.js"></script>
+    <script src="../../static/layer/layer.js"></script>
+    <script src="../../static/my97/WdatePicker.js"></script>
+    <script src="../../static/jquery-validation/jquery.validate.js"></script>
+    <script src="../../static/jquery-validation/localization/messages_zh_CN.js"></script>
+    <script src="../../static/jquery-validation/jquery.validate.extend.js"></script>
+    <script src="../../static/common/jeesite.js"></script>
+    <script src="../../static/common/jeesite_zh_CN.js"></script>
+    <script src="../../static/common/common.js"></script>
+    <script>
+        $('#inputForm').validate({
+            submitHandler:function (form) {
+                js.ajaxSubmitForm($(form),function (data) {
+                    js.showMessage(data.message);
+                    if(data.result == Global.TRUE){
+                        js.closeCurrentTabPage(function (contentWindow) {
+                            contentWindow.page();
+                        });
+                    }
+                },"json");
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
